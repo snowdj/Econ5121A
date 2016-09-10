@@ -8,15 +8,11 @@
 
 	<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
 
-	<link rel="stylesheet" href="{{ "/css/nav.css" | prepend: site.baseurl }}">
+	<link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
 
 <section class="page-header">
-	<link rel="stylesheet" href="{{ page.url | replace:'index.html','' | prepend: site.github.url }}">{{ page.title }}
-	<!--	{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" -->
   <link rel="stylesheet" type="text/css" href="{{ site.github.url }}/css/main.css" media="screen">
-	<!-- <h1 class="project-name">Econ5170</h1>
-	 -->
-	 <h1>Econ5121: Econometric Theory and Applications</h1>
+
 
 </section>
 
