@@ -11,7 +11,7 @@ permalink: /software/
 <br>
 ### R demonstration
 
-* [Law of large numbers](/R_demo_html/LLN.html)
+* [Law of large numbers](/Econ5121A/R_demo_html/LLN.html)
 
 <br>
 ### A Personal Recommendation of **R**
