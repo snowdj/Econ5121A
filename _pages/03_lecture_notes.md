@@ -14,5 +14,6 @@ The text is very incomplete, and must contain many errors. **Use them at your ow
 
 * [Lecture 1](https://github.com/zhentaoshi/Econ5121A/blob/master/lecture1.pdf)
 * [Lecture 2](https://github.com/zhentaoshi/Econ5121A/blob/master/lecture2.pdf)
+* [Lecture 3](https://github.com/zhentaoshi/Econ5121A/blob/master/lecture3.pdf)
 
 Licensed under the [Creative Commons Attribution-NonCommercial License 3.0](https://creativecommons.org/licenses/by-nc/3.0/).
