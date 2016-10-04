@@ -24,3 +24,4 @@ Lecture notes
 Code demonstrations
 
 * [OLS algebra](https://github.com/zhentaoshi/Econ5121A/blob/master/R_demo/OLS_algebra.pdf)
+* [Law of large numbers](https://github.com/zhentaoshi/Econ5121A/blob/master/R_demo/LLN.pdf)

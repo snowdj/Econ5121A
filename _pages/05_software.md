@@ -8,10 +8,6 @@ permalink: /software/
 * [R_introduction.pdf](http://cran.r-project.org/doc/manuals/R-intro.pdf)
 * [Applied Econometrics with R](http://www.springer.com/us/book/9780387773162)
 
-<br>
-### R demonstration
-
-* [Law of large numbers](/Econ5121A/R_demo_html/LLN.html)
 
 <br>
 ### A Personal Recommendation of **R**
