@@ -20,6 +20,7 @@ Lecture notes
 * [Lecture 2](https://github.com/zhentaoshi/Econ5121A/blob/master/lecture2.pdf)
 * [Lecture 3](https://github.com/zhentaoshi/Econ5121A/blob/master/lecture3.pdf)
 * [Lecture 4](https://github.com/zhentaoshi/Econ5121A/blob/master/lecture4.pdf)
+* [Lecture 5](https://github.com/zhentaoshi/Econ5121A/blob/master/lecture5.pdf)
 
 Code demonstrations
 
