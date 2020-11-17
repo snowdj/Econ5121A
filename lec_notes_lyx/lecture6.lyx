@@ -4,25 +4,19 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass article
-\begin_preamble
-\usepackage[T1]{fontenc}
-% Nicer default font (+ math font) than Computer Modern for most use cases
-\usepackage{mathpazo}
-\end_preamble
+\textclass report
 \use_default_options false
 \begin_modules
-theorems-ams-bytype
-theorems-ams-extended-bytype
+theorems-ams-chap-bytype
 \end_modules
 \maintain_unincluded_children false
 \language english
-\language_package default
-\inputencoding auto
-\fontencoding global
-\font_roman "default" "default"
+\language_package none
+\inputencoding utf8x
+\fontencoding T1
+\font_roman "palatino" "default"
 \font_sans "default" "default"
-\font_typewriter "default" "default"
+\font_typewriter "mathpazo" "default"
 \font_math "auto" "auto"
 \font_default_family default
 \use_non_tex_fonts false
@@ -33,32 +27,31 @@ theorems-ams-extended-bytype
 \use_microtype false
 \use_dash_ligatures true
 \graphics default
-\default_output_format dvi
-\output_sync 1
-\output_sync_macro "\synctex=-1"
+\default_output_format default
+\output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 11
-\spacing single
+\paperfontsize 12
+\spacing double
 \use_hyperref true
-\pdf_bookmarks true
+\pdf_bookmarks false
 \pdf_bookmarksnumbered false
 \pdf_bookmarksopen false
 \pdf_bookmarksopenlevel 1
-\pdf_breaklinks false
+\pdf_breaklinks true
 \pdf_pdfborder true
 \pdf_colorlinks false
-\pdf_backref false
-\pdf_pdfusetitle true
+\pdf_backref section
+\pdf_pdfusetitle false
 \papersize default
-\use_geometry true
-\use_package amsmath 1
-\use_package amssymb 1
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
 \use_package cancel 0
 \use_package esint 1
-\use_package mathdots 1
+\use_package mathdots 0
 \use_package mathtools 0
-\use_package mhchem 1
+\use_package mhchem 0
 \use_package stackrel 0
 \use_package stmaryrd 0
 \use_package undertilde 0
@@ -70,18 +63,8 @@ theorems-ams-extended-bytype
 \paperorientation portrait
 \suppress_date false
 \justification true
-\use_refstyle 1
+\use_refstyle 0
 \use_minted 0
-\branch abc
-\selected 1
-\filename_suffix 0
-\color #faf0e6
-\end_branch
-\branch pf of gamma = 0
-\selected 0
-\filename_suffix 0
-\color #faf0e6
-\end_branch
 \index Index
 \shortcut idx
 \color #008000
@@ -101,8 +84,9 @@ theorems-ams-extended-bytype
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\bullet 1 0 9 -1
 \tracking_changes false
-\output_changes true
+\output_changes false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
@@ -111,193 +95,6 @@ theorems-ams-extended-bytype
 \begin_body
 
 \begin_layout Standard
-\begin_inset FormulaMacro
-\newcommand{\top}{\stackrel{\mathrm{p}}{\to}}
-\end_inset
-
- 
-\begin_inset FormulaMacro
-\newcommand{\Op}{O_{\mathrm{p}}}
-\end_inset
-
-
-\begin_inset FormulaMacro
-\newcommand{\op}{o_{\mathrm{p}}}
-\end_inset
-
-
-\begin_inset FormulaMacro
-\newcommand{\E}{\mathbb{E}}
-\end_inset
-
-
-\begin_inset FormulaMacro
-\newcommand{\d}{\mathrm{d}}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Title
-Endogeneity
-\end_layout
-
-\begin_layout Author
-Zhentao Shi
-\end_layout
-
-\begin_layout Section
-Introduction 
-\end_layout
-
-\begin_layout Standard
-In microeconomic analysis, exogenous variables are the factors determined
- outside of the economic system under consideration, and endogenous variables
- are those decided within the economic system.
- The terms 
-\begin_inset Quotes eld
-\end_inset
-
-endogenous
-\begin_inset Quotes erd
-\end_inset
-
- and 
-\begin_inset Quotes eld
-\end_inset
-
-exogenous
-\begin_inset Quotes erd
-\end_inset
-
- in microeconomics will be carried over into multiple-equation econometric
- models.
- While in a single-equation regression model 
-\begin_inset Formula 
-\begin{equation}
-y_{i}=x_{i}'\beta+e_{i}\label{eq:generative}
-\end{equation}
-
-\end_inset
-
-is only part of the equation system.
- To make it simple, in the single-equation model we say an 
-\begin_inset Formula $x_{ik}$
-\end_inset
-
- is 
-\emph on
-endogenous, 
-\emph default
-or is an 
-\emph on
-endogenous variable
-\emph default
-, if 
-\begin_inset Formula $\mathrm{cov}\left(x_{ik},\epsilon_{i}\right)\neq0$
-\end_inset
-
-; otherwise 
-\begin_inset Formula $x_{ik}$
-\end_inset
-
- is an 
-\emph on
-exogenous variable
-\emph default
-.
-\end_layout
-
-\begin_layout Standard
-Empirical works using linear regressions are routinely challenged by questions
- about endogeneity.
- Such questions plague economic seminars and referee reports.
- To defend empirical strategies in quantitative economic studies, it is
- important to understand the source of potential endogeneity and thoroughly
- discuss attempts for resolving endogeneity.
-\end_layout
-
-\begin_layout Standard
-Endogeneity usually implies difficulty in identifying the parameter of interest
- with only 
-\begin_inset Formula $\left(y_{i},x_{i}\right)$
-\end_inset
-
-.
- Identification is critical for the interpretation of empirical economic
- research.
- We say a parameter is 
-\emph on
-identified
-\emph default
- if the mapping between the parameter in the model and the distribution
- of the observed variable is one-to-one; otherwise we say the parameter
- is 
-\emph on
-under-identified
-\emph default
-, or the parameter is failed to be identified.
- This is an abstract definition, and let us discuss it in more family linear
- regression context.
- 
-\end_layout
-
-\begin_layout Example
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Identification failure due to collinearity
-\end_layout
-
-\end_inset
-
- The linear projection model implies the moment equation 
-\begin_inset Formula 
-\begin{equation}
-\E\left[x_{i}x_{i}'\right]\beta=\E\left[x_{i}y_{i}\right].\label{eq:k-equation-FOC}
-\end{equation}
-
-\end_inset
-
-If 
-\begin_inset Formula $E\left[x_{i}x_{i}'\right]$
-\end_inset
-
- is of full rank, then 
-\begin_inset Formula $\beta=\left(\E\left[x_{i}x_{i}'\right]\right)^{-1}\E\left[x_{i}y_{i}\right]$
-\end_inset
-
- is a function of the quantities of the population moment and it is identified.
- On the contrary, if some 
-\begin_inset Formula $x_{k}$
-\end_inset
-
-'s are perfect collinear so that 
-\begin_inset Formula $\E\left[x_{i}x_{i}'\right]$
-\end_inset
-
- is rank deficient, there are multiple 
-\begin_inset Formula $\beta$
-\end_inset
-
- that satisfies the 
-\begin_inset Formula $k$
-\end_inset
-
--equation system (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:k-equation-FOC"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- Identification fails.
- 
 \begin_inset ERT
 status open
 
@@ -305,8 +102,137 @@ status open
 
 
 \backslash
-qed
+setcounter{chapter}{5}
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Asymptotic Properties of Least Squares
+\end_layout
+
+\begin_layout Standard
+We have learned some basic asymptotic theory in the previous chapter.
+ We apply these results to study asymptotic properties of the OLS estimator
+ 
+\begin_inset Formula $\widehat{\beta}=\left(X'X\right)^{-1}X'Y$
+\end_inset
+
+, which is of key interest in our course.
+ We will show (i) 
+\begin_inset Formula $\widehat{\beta}$
+\end_inset
+
+ is a consistent estimator of the linear projection coefficient 
+\begin_inset Formula $\beta$
+\end_inset
+
+; (ii) 
+\begin_inset Formula $\widehat{\beta}$
+\end_inset
+
+ is asymptotically normal; (iii) the asymptotic normality allows asymptotic
+ inference of 
+\begin_inset Formula $\beta$
+\end_inset
+
+; (iv) under what condition the variance components in the test statistic
+ can be consistently estimated so that the testing procedure is make feasible.
+\end_layout
+
+\begin_layout Section
+Consistency
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Consistency
+\emph default
+ is the most basic requirement for estimators in large sample.
+ Intuitively, it says that when the sample size is arbitrarily large, a
+ desirable estimator should be arbitrarily close (in the sense of convergence
+ in probability) to the population quantity of interest.
+ Otherwise, if an estimator still deviates from the object of interest under
+ infinite sample size, it is hard to persuade other researchers to use such
+ an estimator unless compelling justification is provided.
+\end_layout
+
+\begin_layout Definition
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Consistency
+\end_layout
+
+\end_inset
+
+ For a generic estimator 
+\begin_inset Formula $\widehat{\theta}$
+\end_inset
+
+, we say 
+\begin_inset Formula $\widehat{\theta}$
+\end_inset
+
+ is 
+\emph on
+consistent
+\emph default
+ for 
+\begin_inset Formula $\theta$
+\end_inset
+
+ if 
+\begin_inset Formula $\widehat{\theta}\stackrel{p}{\to}\theta$
+\end_inset
+
+, where 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is some non-random object.
+\end_layout
+
+\begin_layout Standard
+In OLS, we say 
+\begin_inset Formula $\widehat{\beta}$
+\end_inset
+
+ is 
+\emph on
+consistent
+\emph default
+ if 
+\begin_inset Formula $\widehat{\beta}\stackrel{p}{\to}\beta$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+, where 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is the linear projection coefficient of the population model 
+\begin_inset Formula $y_{i}=x_{i}'\beta+e_{i}$
+\end_inset
+
+ with 
+\begin_inset Formula $E\left[x_{i}e_{i}\right]=0$
+\end_inset
+
+.
+ To verify consistency, we write 
+\begin_inset Formula 
+\begin{equation}
+\widehat{\beta}-\beta=\left(X'X\right)^{-1}X'e=\left(\frac{1}{n}\sum_{i=1}^{n}x_{i}x_{i}'\right)^{-1}\frac{1}{n}\sum_{i=1}^{n}x_{i}e_{i}.\label{eq:ols_d}
+\end{equation}
 
 \end_inset
 
@@ -314,10 +240,231 @@ qed
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace medskip
+For simplicity, in this chapter we discuss the iid setting only.
+ The first term, by LLN, 
+\begin_inset Formula 
+\[
+\widehat{Q}:=\frac{1}{n}\sum_{i=1}^{n}x_{i}x_{i}'\stackrel{p}{\to}Q:=E\left[x_{i}x_{i}'\right].
+\]
+
+\end_inset
+
+Here 
+\begin_inset Formula $\widehat{Q}$
+\end_inset
+
+ is the sample mean of 
+\begin_inset Formula $x_{i}x_{i}'$
+\end_inset
+
+ and 
+\begin_inset Formula $Q$
+\end_inset
+
+ is the population mean of 
+\begin_inset Formula $x_{i}x_{i}'$
+\end_inset
+
+.
+ The second term, again by LLN, 
+\begin_inset Formula 
+\[
+\frac{1}{n}\sum_{i=1}^{n}x_{i}e_{i}\stackrel{p}{\to}0.
+\]
+
+\end_inset
+
+The continuous mapping theorem immediately implies 
+\begin_inset Formula 
+\[
+\widehat{\beta}-\beta\stackrel{p}{\to}Q^{-1}\times0=0.
+\]
+
+\end_inset
+
+ The OLS estimator 
+\begin_inset Formula $\widehat{\beta}$
+\end_inset
+
+ is a consistent estimator of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Remark
+No matter whether 
+\begin_inset Formula $\left(y_{i},x_{i}\right)_{i=1}^{n}$
+\end_inset
+
+ is an iid, or inid, or dependent sample, consistency holds as long as the
+ convergence in probability holds for the above two expressions and 
+\begin_inset Formula $Q$
+\end_inset
+
+ is an invertible matrix.
+\end_layout
+
+\begin_layout Section
+Asymptotic Distribution
+\end_layout
+
+\begin_layout Standard
+In finite sample, 
+\begin_inset Formula $\widehat{\beta}$
+\end_inset
+
+ is a random variable.
+ We have shown the distribution of 
+\begin_inset Formula $\widehat{\beta}$
+\end_inset
+
+ under normality before.
+ Without the restrictive normality assumption, how can we characterize the
+ randomness of the OLS estimator?
+\end_layout
+
+\begin_layout Standard
+We know from the previous section that 
+\begin_inset Formula $\hat{\beta}-\beta\stackrel{p}{\to}0$
+\end_inset
+
+ degenerates to a constant.
+ To study its distribution, we must scale it up by a proper multiplier so
+ that in the limit it neither degenerates nor explodes.
+ The suitable scaling factor is 
+\begin_inset Formula $\sqrt{n}$
+\end_inset
+
+, as in a CLT.
+ 
+\begin_inset Formula 
+\[
+\sqrt{n}\left(\widehat{\beta}-\beta\right)=\left(\frac{1}{n}\sum_{i=1}^{n}x_{i}x_{i}'\right)^{-1}\frac{1}{\sqrt{n}}\sum_{i=1}^{n}x_{i}e_{i}.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $E\left[x_{i}e_{i}\right]=0$
+\end_inset
+
+, we apply a CLT to obtain 
+\begin_inset Formula 
+\[
+\frac{1}{\sqrt{n}}\sum_{i=1}^{n}x_{i}e_{i}\stackrel{d}{\to}N\left(0,\Sigma\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\Sigma=E\left[x_{i}x_{i}'e_{i}^{2}\right]$
+\end_inset
+
+.
+ By the continuous mapping theorem, 
+\begin_inset Formula 
+\begin{equation}
+\sqrt{n}\left(\widehat{\beta}-\beta\right)\stackrel{d}{\to}Q^{-1}\times N\left(0,\Sigma\right)\sim N\left(0,\Omega\right)\label{eq:asym_norm}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\Omega=Q^{-1}\Sigma Q^{-1}$
+\end_inset
+
+ is called the 
+\emph on
+asymptotic variance
+\emph default
+.
+ This result is the 
+\emph on
+asymptotic normality
+\emph default
+ of the OLS estimator.
+\end_layout
+
+\begin_layout Standard
+The asymptotic variance 
+\begin_inset Formula $\Omega=Q^{-1}\Sigma Q^{-1}$
+\end_inset
+
+ is called of the 
+\emph on
+sandwich form
+\emph default
+.
+ It can be simplified under conditional homoskedasticity 
+\begin_inset Formula $E\left[e_{i}^{2}|x_{i}\right]=\sigma^{2}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+, which gives 
+\begin_inset Formula 
+\[
+\Sigma=E\left[x_{i}x_{i}'e_{i}^{2}\right]=E\left[x_{i}x_{i}'E\left[e_{i}^{2}|X\right]\right]=\sigma^{2}E\left[x_{i}x_{i}'\right]=\sigma^{2}Q.
+\]
+
+\end_inset
+
+In this case, 
+\begin_inset Formula $\Omega=Q^{-1}\Sigma Q^{-1}=\sigma^{2}Q^{-1}$
+\end_inset
+
+, and thus 
+\begin_inset Formula 
+\begin{equation}
+\sqrt{n}\left(\widehat{\beta}-\beta\right)\stackrel{d}{\to}N\left(0,\sigma^{2}Q^{-1}\right).\label{eq:asym_norm_homo}
+\end{equation}
+
 \end_inset
 
 
+\end_layout
+
+\begin_layout Remark
+If we are interested in the 
+\begin_inset Formula $k$
+\end_inset
+
+-th parameter 
+\begin_inset Formula $\beta_{k}$
+\end_inset
+
+, then the joint distribution in (
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:asym_norm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) implies 
+\begin_inset Formula 
+\begin{align}
+\sqrt{n}\left(\widehat{\beta}_{k}-\beta_{k}\right) & =\sqrt{n}\eta_{k}'\left(\widehat{\beta}-\beta\right)\nonumber \\
+ & \stackrel{d}{\to}N\left(0,\sigma^{2}\eta_{k}'Q^{-1}\eta_{k}\right)\sim N\left(0,\sigma^{2}[Q^{-1}]_{kk}\right),\label{eq:asym_norm_homok}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\eta_{k}=\left(0,\ldots,0,1,0\ldots,0\right)'$
+\end_inset
+
+ is the selector of the 
+\begin_inset Formula $k$
+\end_inset
+
+-th element.
 \end_layout
 
 \begin_layout Standard
@@ -327,132 +474,454 @@ qed
 
 \end_layout
 
-\begin_layout Example
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Identification failure due to endogeneity
-\end_layout
-
+\begin_layout Remark
+If 
+\begin_inset Formula $\Omega^{-1/2}$
 \end_inset
 
- Suppose 
-\begin_inset Formula $x_{i}$
-\end_inset
-
- is a scalar random variable, 
-\begin_inset Formula 
-\[
-\begin{pmatrix}x_{i}\\
-e_{i}
-\end{pmatrix}\sim N\left(\begin{pmatrix}0\\
-0
-\end{pmatrix},\begin{pmatrix}1 & \sigma_{xe}\\
-\sigma_{xe} & 1
-\end{pmatrix}\right)
-\]
-
-\end_inset
-
- follows a joint normal distribution, and the dependent variable 
-\begin_inset Formula $y_{i}$
-\end_inset
-
- is generated from (
+ is multiplied on both sides of 
 \begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:generative"
+LatexCommand eqref
+reference "eq:asym_norm"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
-).
- The joint normal assumption implies that the conditional mean 
+, we have 
+\begin_inset Formula 
+\begin{equation}
+\Omega^{-1/2}\sqrt{n}\left(\widehat{\beta}-\beta\right)\stackrel{d}{\to}N\left(0,I_{K}\right).\label{eq:asym_norm-pivot}
+\end{equation}
+
+\end_inset
+
+We say the asymptotic distribution in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:asym_norm-pivot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset Formula $N\left(0,I_{K}\right)$
+\end_inset
+
+, is 
+\emph on
+pivotal
+\emph default
+ because it does not involve any unknown parameter.
+ In contrast, the asymptotic distribution in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:asym_norm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is not pivotal because 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is unknown in 
+\begin_inset Formula $N\left(0,\Omega\right)$
+\end_inset
+
+.
+ If we are interested in the 
+\begin_inset Formula $k$
+\end_inset
+
+-th parameter 
+\begin_inset Formula $\beta_{k}$
+\end_inset
+
+, we can write 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:asym_norm-pivot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ into the pivotal form as 
+\begin_inset Formula 
+\begin{equation}
+\frac{\sqrt{n}\left(\widehat{\beta}_{k}-\beta_{k}\right)}{\sqrt{\sigma^{2}[Q^{-1}]_{kk}}}\stackrel{d}{\to}N\left(0,1\right).\label{eq:asym_norm_homok_pivot}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Asymptotic Inference
+\end_layout
+
+\begin_layout Standard
+Up to now we have derived the asymptotic distribution of 
+\begin_inset Formula $\widehat{\beta}$
+\end_inset
+
+.
+ However, 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:asym_norm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ or 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:asym_norm-pivot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ will be useful for statistical inference only if 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is known.
+ In reality 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is mostly unknown, and therefore we will need to estimate it to make statistica
+l inference feasible.
+ Suppose 
+\begin_inset Formula $\tilde{\Omega}$
+\end_inset
+
+ is any consistent estimator for 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ in that 
+\begin_inset Formula $\tilde{\Omega}\stackrel{p}{\to}\Omega$
+\end_inset
+
+.
+ When we replace 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:asym_norm-pivot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ with 
+\begin_inset Formula $\tilde{\Omega}$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\begin{align*}
+\tilde{\Omega}^{-1/2}\sqrt{n}\left(\widehat{\beta}-\beta\right) & =\tilde{\Omega}^{-1/2}\Omega^{1/2}\times\Omega^{-1/2}\sqrt{n}\left(\widehat{\beta}-\beta\right).
+\end{align*}
+
+\end_inset
+
+Because 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is positive definite, we have the first factor 
+\begin_inset Formula $\tilde{\Omega}^{-1/2}\Omega^{1/2}\stackrel{p}{\to}I_{K}$
+\end_inset
+
+ by the continuous mapping theorem.
+ The second factor is asymptotic normal by 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:asym_norm-pivot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Thus Slutsky's theorem implies
+\begin_inset Formula 
+\begin{equation}
+\tilde{\Omega}^{-1/2}\sqrt{n}\left(\widehat{\beta}-\beta\right)\stackrel{d}{\to}N\left(0,I_{K}\right)\label{eq:asym_norm_feasible}
+\end{equation}
+
+\end_inset
+
+and 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:asym_norm_feasible"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is a feasible statistic for asymptotic inference.
+ 
+\end_layout
+
+\begin_layout Standard
+The next question is how to consistently estimate 
+\begin_inset Formula $\Omega=Q^{-1}\Sigma Q^{-1}$
+\end_inset
+
+, or equivalent how to come up with an 
+\begin_inset Formula $\tilde{\Omega}$
+\end_inset
+
+.
+ We have had 
+\begin_inset Formula $\widehat{Q}\stackrel{p}{\to}Q$
+\end_inset
+
+.
+ If we have a consistent estimator 
+\begin_inset Formula $\tilde{\Sigma}$
+\end_inset
+
+ for 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+, then we can plug in these consistent estimators to form 
+\begin_inset Formula $\tilde{\Omega}=\widehat{Q}^{-1}\tilde{\Sigma}\widehat{Q}^{-1}$
+\end_inset
+
+.
+ The tricky question is how to consistently estimate 
+\begin_inset Formula $\Sigma=E\left[x_{i}x_{i}'e_{i}^{2}\right]$
+\end_inset
+
+.
+ We cannot use the sample mean of 
+\begin_inset Formula $x_{i}x_{i}'e_{i}^{2}$
+\end_inset
+
+ to estimate 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ because 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ is unobservable.
+ Under homoskedasticity 
+\begin_inset Formula $\Omega=Q^{-1}\Sigma Q^{-1}=\sigma^{2}Q^{-1}$
+\end_inset
+
+, and similarly we cannot use the sample mean of 
+\begin_inset Formula $e_{i}^{2}$
+\end_inset
+
+ to estimate 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example
+Heteroskedasticity is ubiquitous in econometrics.
+ A regression example that naturally generates conditional heteroskedasticity
+ is the 
+\emph on
+linear probability model
+\emph default
+ 
+\begin_inset Formula $y_{i}=x_{i}'\beta+e_{i}$
+\end_inset
+
+, where 
+\begin_inset Formula $y_{i}\in\left\{ 0,1\right\} $
+\end_inset
+
+ is a binary dependent variable.
+ Assume CEF as 
+\begin_inset Formula $E\left[y_{i}|x_{i}\right]=x_{i}'\beta$
+\end_inset
+
+, so we can use OLS to consistently estimate 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Notice that the error term 
 \begin_inset Formula 
 \[
-\E\left[y_{i}|x_{i}\right]=\beta x_{i}+\E\left[e_{i}|x_{i}\right]=\left(\beta+\sigma_{xe}\right)x_{i}
+e_{i}=\begin{cases}
+1-x_{i}'\beta, & \text{if }y_{i}=1\\
+-x_{i}'\beta & \text{if }y_{i}=0
+\end{cases}.
 \]
 
 \end_inset
 
- coincides with the linear projection model, and 
-\begin_inset Formula $\beta+\sigma_{xe}$
+
+\end_layout
+
 \end_inset
 
- is the linear projection coefficient.
- From the observable random variable 
-\begin_inset Formula $\left(y_{i},x_{i}\right)$
+The conditional variance 
+\begin_inset Formula 
+\[
+\mathrm{var}\left[e_{i}|x_{i}\right]=\mathrm{var}\left[y_{i}|x_{i}\right]=E\left[y_{i}|x_{i}\right]\left(1-E\left[y_{i}|x_{i}\right]\right)=x_{i}'\beta\left(1-x_{i}'\beta\right)
+\]
+
 \end_inset
 
-, we can only learn 
-\begin_inset Formula $\beta+\sigma_{xe}$
+ explicitly depends on 
+\begin_inset Formula $x_{i}$
 \end_inset
 
 .
- As we cannot learn 
-\begin_inset Formula $\sigma_{xe}$
+ In other words, the conditional variance varies with 
+\begin_inset Formula $x_{i}$
 \end_inset
 
- from the data due to the unobservable 
+.
+\end_layout
+
+\begin_layout Standard
+Naturally, one may attempt to use the OLS residual 
+\begin_inset Formula $\widehat{e}_{i}=\widehat{y}_{i}-x_{i}'\widehat{\beta}$
+\end_inset
+
+ to replace the regression error 
 \begin_inset Formula $e_{i}$
 \end_inset
 
-, there is no way to recover 
-\begin_inset Formula $\beta$
+, so that we would have the plug-in estimators 
+\begin_inset Formula $\widehat{\Omega}=\widehat{\sigma}^{2}\widehat{Q}^{-1}$
+\end_inset
+
+ for homoskedasticity, where 
+\begin_inset Formula $\widehat{\sigma}^{2}=\widehat{e}'\widehat{e}/\left(n-K\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $\widehat{\sigma}^{2}=\widehat{e}'\widehat{e}/n$
+\end_inset
+
+, and 
+\begin_inset Formula $\widehat{\Omega}=\widehat{Q}^{-1}\widehat{\Sigma}\widehat{Q}^{-1}$
+\end_inset
+
+ for heteroskedasticity, where 
+\begin_inset Formula $\widehat{\Sigma}=n^{-1}\sum_{i}x_{i}x_{i}'\widehat{e}_{i}^{2}$
 \end_inset
 
 .
- This is exactly the 
-\emph on
-omitted variable bias
-\emph default
- that we have discussed earlier in this course.
- The gap lies between the available data 
-\begin_inset Formula $\left(y_{i},x_{i}\right)$
-\end_inset
-
- and the identification of the  model.
- In the special case that we assume 
-\begin_inset Formula $\sigma_{xe}=0$
-\end_inset
-
-, the endogeneity vanishes and 
-\begin_inset Formula $\beta$
-\end_inset
-
- is identified.
- 
 \end_layout
 
-\begin_layout Example
-The linear projection model is so far the most general model in this course
- that justifies OLS.
- OLS is consistent for the linear projection coefficient.
- By the definition of the linear projection model, 
-\begin_inset Formula $\E\left[x_{i}e_{i}\right]=0$
+\begin_layout Standard
+\begin_inset VSpace medskip
 \end_inset
 
- so there is no room for endogeneity in the linear projection model.
- In other words, if we talk about endogeneity, we must not be working with
- the linear projection model, and the coefficients we pursue are not the
- linear projection coefficients.
- 
-\begin_inset ERT
-status open
 
-\begin_layout Plain Layout
-
-
-\backslash
-qed
 \end_layout
 
+\begin_layout Remark
+If we choose 
+\begin_inset Formula $\widehat{\sigma}^{2}=\widehat{e}'\widehat{e}/\left(n-K\right)$
 \end_inset
 
+ and replace 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
 
+ in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:asym_norm_homok_pivot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, then the resulting statistic 
+\begin_inset Formula $T_{k}=\frac{\sqrt{n}\left(\widehat{\beta}_{k}-\beta_{k}\right)}{\sqrt{\widehat{\sigma}^{2}[\widehat{Q}^{-1}]_{kk}}}$
+\end_inset
+
+ is exactly the 
+\begin_inset Formula $t$
+\end_inset
+
+-statistic in the finite sample analysis.
+ Recall that under the classical normal-error assumption, the 
+\begin_inset Formula $t$
+\end_inset
+
+-statistics follows exact finite sample 
+\begin_inset Formula $t$
+\end_inset
+
+-distribution with degrees of freedom 
+\begin_inset Formula $n-K$
+\end_inset
+
+.
+ In asymptotic analysis, we allow 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ to be any distribution if 
+\begin_inset Formula $E\left[e_{i}^{2}|x_{i}\right]<\infty$
+\end_inset
+
+ (We impose this assumption for simplicity.
+ It can be further relaxed in inid cases.) The asymptotic normality allows
+ us to conduct asymptotic statistical inference.
+ For the same 
+\begin_inset Formula $t$
+\end_inset
+
+-statistic, we must draw the critical values from the normal distribution,
+ because 
+\begin_inset Formula 
+\[
+T_{k}=\frac{\sqrt{\sigma^{2}[Q^{-1}]_{kk}}}{\sqrt{\widehat{\sigma}^{2}[\widehat{Q}^{-1}]_{kk}}}\cdot\frac{\sqrt{n}\left(\widehat{\beta}_{k}-\beta_{k}\right)}{\sqrt{\sigma^{2}[Q^{-1}]_{kk}}}\stackrel{d}{\to}1\times N\left(0,1\right)\sim N\left(0,1\right)
+\]
+
+\end_inset
+
+by Slutsky's theorem if 
+\begin_inset Formula $\widehat{\sigma}^{2}\stackrel{p}{\to}\sigma^{2}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -463,589 +932,741 @@ qed
 \end_layout
 
 \begin_layout Standard
-In econometrics we are often interested in a model with economic interpretation.
- The common practice in empirical research assumes that the observed data
- are generated from a parsimonious model, and the next step is to estimate
- the unknown parameters in the model.
- Since it is often possible to name some factors not included in the regressors
- but they are correlated with the included regressors and in the mean time
- also affects 
-\begin_inset Formula $y_{i}$
+The next section will give sufficient conditions for 
+\begin_inset Formula $\widehat{\sigma}^{2}\stackrel{p}{\to}\sigma^{2}$
 \end_inset
 
-, endogeneity becomes a fundamental problem.
- 
-\end_layout
-
-\begin_layout Standard
-To resolve endogeneity, we seek extra variables or data structure that may
- guarantee the identification of the model.
- The most often used methods are (i) fixed effect model (ii) instrumental
- variables.
- The fixed effect model requires that multiple observations, often across
- time, are collected for each individual 
-\begin_inset Formula $i$
-\end_inset
-
-.
- Moreover, the source of endogeneity is time invariant and enters the  model
- additively in the form 
-\begin_inset Formula 
-\[
-y_{it}=x_{it}'\beta+u_{it},
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $u_{it}=\alpha_{i}+\epsilon_{it}$
-\end_inset
-
- is the composite error.
- The panel data approach extends 
-\begin_inset Formula $\left(y_{i},x_{i}\right)$
-\end_inset
-
- to 
-\begin_inset Formula $\left(y_{it},x_{it}\right)_{i=1}^{T}$
-\end_inset
-
- if data are available along the time dimension.
-\end_layout
-
-\begin_layout Standard
-The instrumental variable approach extends 
-\begin_inset Formula $\left(y_{i},x_{i}\right)$
-\end_inset
-
- to 
-\begin_inset Formula $\left(y_{i},x_{i},z_{i}\right)$
-\end_inset
-
-, where the extra random variable 
-\begin_inset Formula $z_{i}$
-\end_inset
-
- is called the 
-\emph on
-instrument
-\emph default
- 
-\emph on
-variable
-\emph default
-.
- It is assumed that 
-\begin_inset Formula $z_{i}$
-\end_inset
-
- is orthogonal to the error 
-\begin_inset Formula $e_{i}$
-\end_inset
-
- .
- Therefore, along with the model it adds an extra variable 
-\begin_inset Formula $z_{i}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Before closing this section, we stress that either the panel data approach
- or the instrumental variable approach entails extra information beyond
- 
-\begin_inset Formula $\left(y_{i},x_{i}\right)$
-\end_inset
-
-.
- Without such extra data, there is no way to resolve the identification
- failure.
- Just as the linear project model is available for any joint distribution
- of 
-\begin_inset Formula $\left(y_{i},x_{i}\right)$
-\end_inset
-
- with existence of suitable moments, from a pure statistical point of view
- a linear IV model is an artifact depends only on the choice of 
-\begin_inset Formula $\left(y_{i},x_{i},z_{i}\right)$
-\end_inset
-
- without referencing to any economics.
- In essence, the linear IV model seeks a linear combination  
-\begin_inset Formula $y_{i}-\beta x_{i}$
-\end_inset
-
- that is orthogonal to the linear space spanned by 
-\begin_inset Formula $z_{i}$
+ and 
+\begin_inset Formula $\widehat{\Sigma}\stackrel{p}{\to}\Sigma$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Section
-Examples
+Consistency of Feasible Variance Estimator
 \end_layout
 
 \begin_layout Standard
-As econometricians mostly work with non-experimental data, we cannot overstate
- the importance of the endogeneity problem.
- We go over a few examples.
+We first show under what conditions all elements of 
+\begin_inset Formula $\Sigma=E\left[x_{i}x_{i}'e_{i}^{2}\right]$
+\end_inset
+
+ are finite.
+ That is, 
+\begin_inset Formula $\left\Vert \Sigma\right\Vert _{\infty}<\infty$
+\end_inset
+
+, where 
+\begin_inset Formula $\left\Vert \cdot\right\Vert _{\infty}$
+\end_inset
+
+ is the value of the largest element in absolute value of a matrix or vector.
+ Let 
+\begin_inset Formula $z_{i}=x_{i}e_{i}$
+\end_inset
+
+, so 
+\begin_inset Formula $\Sigma=E\left[z_{i}z_{i}'\right]$
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Example
+\begin_layout Definition
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
-Dynamic Panel Model
+norm and inner product of random variables
 \end_layout
 
 \end_inset
 
- We know that the first-difference (FD) estimator is consistent for (static)
- panel data model.
- Nevertheless, the FD estimator encounters difficulty in a dynamic panel
- model 
-\begin_inset Formula 
-\[
-y_{it}=\beta_{1}+\beta_{2}y_{it-1}+\beta_{3}x_{it}+\alpha_{i}+\epsilon_{it},
-\]
-
+ For a generic random variable 
+\begin_inset Formula $u_{i}$
 \end_inset
 
-even if we assume 
-\begin_inset Formula 
-\begin{equation}
-\E\left[\epsilon_{it}|\alpha_{i},x_{i1},\ldots,x_{iT},y_{it-1},y_{it-2},\ldots,y_{i0}\right]=0.\label{eq:dyn_mean_0}
-\end{equation}
-
+ with finite variance, define its 
+\begin_inset Formula $L_{2}$
 \end_inset
 
- When taking difference of the above equation for periods 
-\begin_inset Formula $t$
+
+\emph on
+-norm
+\emph default
+ as 
+\begin_inset Formula $\sqrt{E\left[u_{i}^{2}\right]}$
+\end_inset
+
+.
+ Given another generic random variable 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ with finite variance, define the 
+\emph on
+inner product
+\emph default
+ of 
+\begin_inset Formula $u_{i}$
 \end_inset
 
  and 
-\begin_inset Formula $t-1$
+\begin_inset Formula $v_{i}$
 \end_inset
 
-, we have 
-\begin_inset Formula 
-\[
-\left(y_{it}-y_{it-1}\right)=\beta_{2}\left(y_{it-1}-y_{it-2}\right)+\beta_{3}\left(x_{it}-x_{it-1}\right)+\left(\epsilon_{it}-\epsilon_{it-1}\right).
-\]
-
+ as 
+\begin_inset Formula $E\left[u_{i}v_{i}\right]$
 \end_inset
 
-Under (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:dyn_mean_0"
-
-\end_inset
-
-), 
-\begin_inset Formula $\E\left[\left(x_{it}-x_{it-1}\right)\left(\epsilon_{it}-\epsilon_{it-1}\right)\right]=0$
-\end_inset
-
-, but 
-\begin_inset Formula 
-\[
-\E\left[\left(y_{it-1}-y_{it-2}\right)\left(\epsilon_{it}-\epsilon_{it-1}\right)\right]=-\E\left[y_{it-1}\epsilon_{it-1}\right]=-\E\left[\epsilon_{it-1}^{2}\right]\neq0.\qed
-\]
-
-\end_inset
-
-
+.
 \end_layout
 
-\begin_layout Standard
-\begin_inset VSpace medskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Example
+\begin_layout Fact
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
-Classical Measurement Error
+Cauchy-Schwarz inequality for random variables
 \end_layout
 
 \end_inset
 
- Endogeneity also emerges when an explanatory variables is not directly
- observable but is replaced by a measurement with error.
- Suppose the true linear model is 
-\begin_inset Formula 
-\begin{equation}
-y_{i}=\beta_{1}+\beta_{2}x_{i}^{*}+u_{i},\label{eq:measurement_error}
-\end{equation}
-
-\end_inset
-
- with 
-\begin_inset Formula $\E\left[u_{i}|x_{i}^{*}\right]=0$
+ 
+\begin_inset Formula $\left|E\left[u_{i}v_{i}\right]\right|\leq\sqrt{E\left[u_{i}^{2}\right]E\left[v_{i}^{2}\right]}$
 \end_inset
 
 .
- We cannot observe 
-\begin_inset Formula $x_{i}^{*}$
-\end_inset
+\end_layout
 
- but we observe 
-\begin_inset Formula $x_{i}$
-\end_inset
-
-, a measurement of 
-\begin_inset Formula $x_{i}^{*}$
-\end_inset
-
-, and they are linked by 
+\begin_layout Standard
+Because of the Cauchy-Schwarz inequality (cross moments are no larger than
+ variance)
 \begin_inset Formula 
 \[
-x_{i}=x_{i}^{*}+v_{i}
+\left\Vert \Sigma\right\Vert _{\infty}=\max_{k\in[K]}E\left[z_{ik}^{2}\right],
 \]
-
-\end_inset
-
- with 
-\begin_inset Formula $\E\left[v_{i}|x_{i}^{*},u_{i}\right]=0$
-\end_inset
-
-.
- Such a formulation of the measurement error is called the 
-\emph on
-classical measurement error
-\emph default
-.
- Substitute out the unobservable 
-\begin_inset Formula $x_{i}^{*}$
-\end_inset
-
- in (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:measurement_error"
-
-\end_inset
-
-), 
-\begin_inset Formula 
-\begin{equation}
-y_{i}=\beta_{1}+\beta_{2}\left(x_{i}-v_{i}\right)+u_{i}=\beta_{1}+\beta_{2}x_{i}+e_{i}\label{eq:measurement_error2}
-\end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $e_{i}=u_{i}-\beta_{2}v_{i}$
+\begin_inset Formula $\left[K\right]:=\left\{ 1,2,\ldots,K\right\} $
 \end_inset
 
 .
- The correlation
+ For each 
+\begin_inset Formula $k$
+\end_inset
+
+, 
 \begin_inset Formula 
 \[
-\E\left[x_{i}e_{i}\right]=\E\left[\left(x_{i}^{*}+v_{i}\right)\left(u_{i}-\beta_{2}v_{i}\right)\right]=-\beta_{2}\E\left[v_{i}^{2}\right]\neq0.
+E\left[z_{ik}^{2}\right]=E\left[x_{ik}^{2}e_{i}^{2}\right]\leq\left(E\left[x_{ik}^{4}\right]E\left[e_{i}^{4}\right]\right)^{1/2}
 \]
 
 \end_inset
 
- OLS (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:measurement_error2"
+ where the last inequality again follows by the Cauchy-Schwarz inequality.
+ It implies that the 
+\emph on
+sufficient conditions
+\emph default
+ for finite variance are 
+\begin_inset Formula 
+\begin{equation}
+\max_{k}E\left[x_{ik}^{4}\right]<\infty\ \ \mbox{and }\ \ E\left[e_{i}^{4}\right]<\infty.\label{eq:4th_moment}
+\end{equation}
 
 \end_inset
 
-) would not deliver a consistent estimator.
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-qed
+We will maintain these conditions in the following derivation.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Subsection
+Homoskedasticity
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace medskip
+For the estimation of variance, if the error is homoskedastic, 
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}\frac{1}{n}\sum_{i=1}^{n}\widehat{e}_{i}^{2} & =\frac{1}{n}\sum_{i=1}^{n}\left(e_{i}+x_{i}'\left(\widehat{\beta}-\beta\right)\right)^{2}\\
+ & =\frac{1}{n}\sum_{i=1}^{n}e_{i}^{2}+\left(\frac{2}{n}\sum_{i=1}^{n}e_{i}x_{i}\right)'\left(\widehat{\beta}-\beta\right)+\frac{1}{n}\sum_{i=1}^{n}\left(\widehat{\beta}-\beta\right)'x_{i}x_{i}'\left(\widehat{\beta}-\beta\right).
+\end{aligned}
+\label{eq:v-homo1}
+\end{equation}
+
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
-Next, we give two examples of equation systems, one from microeconomics
- and the other from macroeconomics.
-\end_layout
-
-\begin_layout Example
+\begin_layout Definition
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
-Demand-Supply System
+Norm and inner product for vectors
 \end_layout
 
 \end_inset
 
- Let 
-\begin_inset Formula $p_{i}$
+ For a generic 
+\begin_inset Formula $m$
 \end_inset
 
- and 
-\begin_inset Formula $q_{i}$
+-vector 
+\begin_inset Formula $u$
 \end_inset
 
- be a good's log-price and log-quantity on the 
-\begin_inset Formula $i$
+, define its 
+\begin_inset Formula $L_{2}$
 \end_inset
 
--th market, and they are iid across markets.
- We are interested in the demand curve 
-\begin_inset Formula 
-\begin{equation}
-p_{i}=\alpha_{d}-\beta_{d}q_{i}+e_{di}\label{eq:demand}
-\end{equation}
 
-\end_inset
-
-for some 
-\begin_inset Formula $\beta_{d}\geq0$
-\end_inset
-
- and the supply curve
-\begin_inset Formula 
-\begin{equation}
-p_{i}=\alpha_{s}+\beta_{s}q_{i}+e_{si}\label{eq:supply}
-\end{equation}
-
-\end_inset
-
-for some 
-\begin_inset Formula $\beta_{s}\geq0$
+\emph on
+-norm
+\emph default
+ as 
+\begin_inset Formula $\left\Vert u\right\Vert _{2}=\sqrt{u'u}$
 \end_inset
 
 .
- We use a simple linear specification so that the coefficient 
-\begin_inset Formula $\beta_{d}$
+ Given another generic 
+\begin_inset Formula $m$
 \end_inset
 
- can be interpreted as demand elasticity and 
-\begin_inset Formula $\beta_{s}$
+-vector 
+\begin_inset Formula $v$
 \end_inset
 
- as supply elasticity.
- Undergraduate microeconomics teaches the deterministic form but we add
- an error term to cope with the data.
- Can we learn the elasticities by regression 
-\begin_inset Formula $p_{i}$
+, define the 
+\emph on
+inner product
+\emph default
+ of 
+\begin_inset Formula $u$
 \end_inset
 
- on 
-\begin_inset Formula $q_{i}$
+ and 
+\begin_inset Formula $v$
 \end_inset
 
-? 
+ as 
+\begin_inset Formula $\left\langle u,v\right\rangle =u'v$
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Example
-The two equations can be written in a matrix form 
-\begin_inset Formula 
-\begin{equation}
-\begin{pmatrix}1 & \beta_{d}\\
-1 & -\beta_{s}
-\end{pmatrix}\begin{pmatrix}p_{i}\\
-q_{i}
-\end{pmatrix}=\begin{pmatrix}\alpha_{d}\\
-\alpha_{s}
-\end{pmatrix}+\begin{pmatrix}e_{di}\\
-e_{si}
-\end{pmatrix}.\label{eq:structural}
-\end{equation}
+\begin_layout Fact
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Cauchy-Schwarz inequality for vectors
+\end_layout
 
 \end_inset
 
-Microeconomic terminology calls 
-\begin_inset Formula $\left(p_{i},q_{i}\right)$
+ 
+\begin_inset Formula $\left|\left\langle u,v\right\rangle \right|\leq\left\Vert u\right\Vert _{2}\left\Vert v\right\Vert _{2}$
 \end_inset
 
- endogenous variables and 
-\begin_inset Formula $\left(e_{di},e_{si}\right)$
-\end_inset
-
- exogenous variables.
- (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:structural"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-) is a 
-\emph on
-structural equation
-\emph default
- because it is motivated from economic theory so that the coefficients bear
- economic meaning.
- If we rule out the trivial case 
-\begin_inset Formula $\beta_{d}=\beta_{s}=0$
-\end_inset
-
-, we can solve 
-\begin_inset Formula 
-\begin{equation}
-\begin{pmatrix}p_{i}\\
-q_{i}
-\end{pmatrix}=\frac{1}{\beta_{s}+\beta_{d}}\begin{pmatrix}\beta_{s} & \beta_{d}\\
-1 & -1
-\end{pmatrix}\left[\begin{pmatrix}\alpha_{d}\\
-\alpha_{s}
-\end{pmatrix}+\begin{pmatrix}e_{di}\\
-e_{si}
-\end{pmatrix}\right].\label{eq:reduced}
-\end{equation}
-
-\end_inset
-
-This equation (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:reduced"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-) is called the 
-\emph on
-reduced form
-\emph default
-—the endogenous variables are expressed as explicit functions of the parameters
- and the exogenous variables.
- In particular, 
-\begin_inset Formula 
-\[
-q_{i}=\left(\alpha_{d}+e_{di}-\alpha_{s}-e_{si}\right)/\left(\beta_{s}+\beta_{d}\right)
-\]
-
-\end_inset
-
-so that the log-price is correlated with both 
-\begin_inset Formula $e_{si}$
-\end_inset
-
- and 
-\begin_inset Formula $e_{di}$
+, or equivalently 
+\begin_inset Formula $\left|u'v\right|\leq\sqrt{\left(u'u\right)\left(v'v\right)}$
 \end_inset
 
 .
- As 
-\begin_inset Formula $q_{i}$
+\end_layout
+
+\begin_layout Standard
+Notice 
+\begin_inset Formula $\frac{1}{n}\sum_{i=1}^{n}e_{i}x_{i}\stackrel{p}{\to}E\left[e_{i}x_{i}\right]=0$
 \end_inset
 
- is endogenous (in the econometric sense) in either (
+, the second term of 
 \begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:demand"
+LatexCommand eqref
+reference "eq:v-homo1"
 plural "false"
 caps "false"
 noprefix "false"
 
-\end_inset
-
-) or (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:supply"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-), neither the demand elasticity nor the supply elasticity is identified
- with 
-\begin_inset Formula $\left(p_{i},q_{i}\right)$
-\end_inset
-
-.
- Indeed, as 
-\begin_inset Formula 
-\[
-q_{i}=\left(\beta_{s}\alpha_{d}+\beta_{d}\alpha_{s}+\beta_{s}e_{di}+\beta_{d}e_{si}\right)/\left(\beta_{s}+\beta_{d}\right)
-\]
-
-\end_inset
-
-from (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:reduced"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-), the linear projection coefficient of 
-\begin_inset Formula $p_{i}$
-\end_inset
-
- on 
-\begin_inset Formula $q_{i}$
 \end_inset
 
  is 
 \begin_inset Formula 
+\begin{align}
+\left|\left(\frac{2}{n}\sum_{i=1}^{n}e_{i}x_{i}\right)'\left(\widehat{\beta}-\beta\right)\right| & \leq2\left\Vert \frac{1}{n}\sum_{i=1}^{n}x_{i}e_{i}\right\Vert _{2}\left\Vert \widehat{\beta}-\beta\right\Vert _{2}\nonumber \\
+ & =o_{p}\left(1\right)o_{p}\left(1\right)=o_{p}\left(1\right)\label{eq:homo1}
+\end{align}
+
+\end_inset
+
+by Cauchy-Schwarz inequality.
+\end_layout
+
+\begin_layout Fact
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Quadratic inequality
+\end_layout
+
+\end_inset
+
+ For a generic 
+\begin_inset Formula $m\times m$
+\end_inset
+
+ symmetric positive semi-definite matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ and a generic 
+\begin_inset Formula $m$
+\end_inset
+
+ vector 
+\begin_inset Formula $u$
+\end_inset
+
+, we have the 
+\begin_inset Formula 
 \[
-\frac{\mathrm{cov}\left(p_{i},q_{i}\right)}{\mathrm{var}\left(q_{i}\right)}=\frac{\beta_{s}\sigma_{d}^{2}-\beta_{d}\sigma_{s}^{2}+\left(\beta_{d}-\beta_{s}\right)\sigma_{sd}}{\beta_{d}^{2}\sigma_{d}^{2}+\beta_{d}\sigma_{s}^{2}+2\beta_{d}\beta_{s}\sigma_{sd}},
+\left\Vert u\right\Vert _{2}^{2}\lambda_{\min}\left(A\right)\leq u'Au\leq\left\Vert u\right\Vert _{2}^{2}\lambda_{\max}\left(A\right).
 \]
 
 \end_inset
 
-where 
-\begin_inset Formula $\sigma_{d}^{2}=\mathrm{var}\left(e_{di}\right)$
+
+\end_layout
+
+\begin_layout Standard
+The third term of 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:v-homo1"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
-, 
-\begin_inset Formula $\sigma_{s}^{2}=\mathrm{var}\left(e_{si}\right)$
+ is bounded by 
+\begin_inset Formula 
+\begin{align}
+\left(\widehat{\beta}-\beta\right)\left(\frac{1}{n}\sum_{i=1}^{n}e_{i}^{2}x_{i}x'_{i}\right)\left(\widehat{\beta}-\beta\right) & \leq\left\Vert \widehat{\beta}-\beta\right\Vert _{2}^{2}\lambda_{\max}\left(\frac{1}{n}\sum_{i=1}^{n}x_{i}x'_{i}\right)\nonumber \\
+ & \leq\left\Vert \widehat{\beta}-\beta\right\Vert _{2}^{2}\mathrm{trace}\left(\frac{1}{n}\sum_{i=1}^{n}x_{i}x'_{i}\right)\nonumber \\
+ & \leq\left\Vert \widehat{\beta}-\beta\right\Vert _{2}^{2}K\max_{k}\left\{ \frac{1}{n}\sum_{i=1}^{n}x_{ik}^{2}\right\} \nonumber \\
+ & =o_{p}\left(1\right)O_{p}\left(1\right)=o_{p}\left(1\right),\label{eq:homo2}
+\end{align}
+
 \end_inset
 
- and 
-\begin_inset Formula $\sigma_{sd}=\mathrm{cov}\left(e_{di},e_{si}\right)$
+where the stochastic order follows by 
+\begin_inset Formula 
+\[
+\frac{1}{n}\sum_{i=1}^{n}x_{ik}^{2}\stackrel{p}{\to}E\left[x_{ik}^{2}\right]<\infty
+\]
+
+\end_inset
+
+in view of the condition 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:4th_moment"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
 .
 \end_layout
 
-\begin_layout Example
-This is a classical example of the demand-supply system.
- The structural parameter cannot be directly identified because the observed
- 
-\begin_inset Formula $\left(p_{i},q_{i}\right)$
+\begin_layout Standard
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homo1"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- is the outcome of an equilibrium—the crossing of the demand curve and the
- supply curve.
- To identify the demand curve, we will need an instrument that shifts the
- supply curve only; and vice versa.
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homo2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) implies that 
+\begin_inset Formula 
+\[
+\frac{1}{n}\sum_{i=1}^{n}\widehat{e}_{i}^{2}=\frac{1}{n}\sum_{i=1}^{n}e_{i}^{2}+o_{p}\left(1\right)+o_{p}\left(1\right)=\frac{1}{n}\sum_{i=1}^{n}e_{i}^{2}+o_{p}\left(1\right)\stackrel{p}{\to}\sigma_{e}^{2}.
+\]
+
+\end_inset
+
+(See Appendix for the operations of small op and big Op.)
+\end_layout
+
+\begin_layout Subsection
+Heteroskedasticity
+\end_layout
+
+\begin_layout Standard
+The basic strategy of proof is similar for the general case of heteroskedasticit
+y, though each step is more complicated.
  
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}\frac{1}{n}\sum_{i=1}^{n}x_{i}x_{i}'\widehat{e}_{i}^{2} & =\frac{1}{n}\sum_{i=1}^{n}x_{i}x_{i}'\left(e_{i}+x_{i}'\left(\widehat{\beta}-\beta\right)\right)^{2}\\
+ & =\frac{1}{n}\sum_{i=1}^{n}x_{i}x_{i}'e_{i}^{2}+\frac{1}{n}\sum_{i=1}^{n}x_{i}x_{i}'\cdot e_{i}x_{i}'\left(\widehat{\beta}-\beta\right)+\frac{1}{n}\sum_{i=1}^{n}x_{i}x_{i}'\left(\left(\widehat{\beta}-\beta\right)'x_{i}\right)^{2}.
+\end{aligned}
+\label{eq:v-hetero}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $L_{p}$
+\end_inset
+
+-norm for vectors
+\end_layout
+
+\end_inset
+
+ For a generic 
+\begin_inset Formula $m$
+\end_inset
+
+-vector 
+\begin_inset Formula $u$
+\end_inset
+
+, its 
+\begin_inset Formula $L_{p}$
+\end_inset
+
+-norm (for 
+\begin_inset Formula $p\geq1$
+\end_inset
+
+) is defined as 
+\begin_inset Formula $\left\Vert u\right\Vert _{p}=\left(\left|u_{1}\right|^{p}+\cdots+\left|u_{m}\right|^{p}\right)^{1/p}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Fact
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Holder's inequality
+\end_layout
+
+\end_inset
+
+ For two generic 
+\begin_inset Formula $m$
+\end_inset
+
+-vectors 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $v$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+\left|u'v\right|\leq\left\Vert u\right\Vert _{p}\left\Vert q\right\Vert _{q}
+\]
+
+\end_inset
+
+ for any 
+\begin_inset Formula $p,q\in[1,\infty)$
+\end_inset
+
+ and 
+\begin_inset Formula $1/p+1/q=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Remark
+Cauchy-Schwarz inequality is a special case of Holder's inequality when
+ 
+\begin_inset Formula $p=q=2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The second term of 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:v-hetero"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is bounded by 
+\begin_inset Formula 
+\[
+\begin{aligned} & \max_{k,k'}\left|\frac{1}{n}\sum_{i=1}^{n}x_{ik}x_{ik'}\cdot e_{i}x_{i}'\left(\widehat{\beta}-\beta\right)\right|\\
+ & \leq\left\Vert \widehat{\beta}-\beta\right\Vert _{2}\max_{k,k'}\left\Vert \frac{1}{n}\sum_{i=1}^{n}x_{i}e_{i}x_{ik}x_{ik'}\right\Vert _{2}\\
+ & \leq\left\Vert \widehat{\beta}-\beta\right\Vert _{2}\sqrt{K}\max_{k,k',k''}\left|\frac{1}{n}\sum_{i=1}^{n}e_{i}x_{ik}x_{ik'}x_{ik''}\right|\\
+ & \leq\left\Vert \widehat{\beta}-\beta\right\Vert _{2}\sqrt{K}\left(\frac{1}{n}\sum_{i=1}^{n}e_{i}^{4}\right)^{1/4}\max_{k,k',k''}\left(\frac{1}{n}\sum_{i=1}^{n}\left(x_{ik}x_{ik'}x_{ik''}\right)^{4/3}\right)^{3/4}\\
+ & \leq\left\Vert \widehat{\beta}-\beta\right\Vert _{2}\sqrt{K}\left(\frac{1}{n}\sum_{i=1}^{n}e_{i}^{4}\right)^{1/4}\max_{k}\left(\frac{1}{n}\sum_{i=1}^{n}x_{ik}^{4}\right)^{3/4}\\
+ & =o_{p}\left(1\right)O_{p}\left(1\right)O_{p}\left(1\right)=o_{p}\left(1\right)
+\end{aligned}
+\]
+
+\end_inset
+
+where the third inequality hold by the Holder's inequality with 
+\begin_inset Formula $p=4$
+\end_inset
+
+ and 
+\begin_inset Formula $q=4/3$
+\end_inset
+
+, and the stochastic order is guaranteed if under suitable conditions 
+\begin_inset Formula 
+\[
+\frac{1}{n}\sum_{i=1}^{n}e_{i}^{4}\stackrel{p}{\to}E\left[e_{i}^{4}\right]<\infty\ \ \text{and }\ \ \frac{1}{n}\sum_{i=1}^{n}x_{ik}^{4}\stackrel{p}{\to}E\left[x_{ik}^{4}\right]<\infty.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The third term of 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:v-hetero"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is bounded by 
+\begin_inset Formula 
+\[
+\begin{aligned} & \max_{k_{1},k_{2}}\left|\frac{1}{n}\sum_{i=1}^{n}x_{ik_{1}}x_{ik_{2}}\left(\left(\widehat{\beta}-\beta\right)'x_{i}\right)^{2}\right|\\
+ & \leq\left\Vert \widehat{\beta}-\beta\right\Vert _{2}^{2}\max_{k_{1},k_{2}}\left|\frac{1}{n}\sum_{i=1}^{n}x_{ik_{1}}x_{ik_{2}}\left(x_{i}x_{i}'\right)\right|\\
+ & \leq\left\Vert \widehat{\beta}-\beta\right\Vert _{2}^{2}\max_{k_{1},k_{2},k_{3},k_{4}}\left|\frac{1}{n}\sum_{i=1}^{n}x_{ik_{1}}x_{ik_{2}}x_{ik_{3}}x_{ik_{4}}\right|\\
+ & \leq\left\Vert \widehat{\beta}-\beta\right\Vert _{2}^{2}\max_{k_{1},k_{2}}\left|\frac{1}{n}\sum_{i=1}^{n}x_{ik_{1}}^{2}x_{ik_{2}}^{2}\right|\\
+ & \leq\left\Vert \widehat{\beta}-\beta\right\Vert _{2}^{2}\max_{k}\left|\frac{1}{n}\sum_{i=1}^{n}x_{ik}^{4}\right|\\
+ & =o_{p}\left(1\right)O_{p}\left(1\right)=o_{p}\left(1\right).
+\end{aligned}
+\]
+
+\end_inset
+
+where the third and the fourth inequalities follow by applying Cauchy Schwarz
+ inequality.
+\end_layout
+
+\begin_layout Section
+Summary
+\end_layout
+
+\begin_layout Standard
+One of the most important techniques in asymptotic theory is manipulating
+ inequalities.
+ These derivations of the variances look complicated at first glance, but
+ is often encountered in proofs of theoretical results.
+ After many years of torment, you will be accustomed to these routine calculatio
+ns.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Historical notes
+\series default
+: 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "white1980heteroskedasticity"
+literal "false"
+
+\end_inset
+
+ drew attention of economic contexts that violate the classical statistical
+ assumptions in linear regressions.
+ It seeded econometricians' care, or obsession, in variance estimation for
+ statistical inference.
+ The following decades has witnessed a plethora of proposals of variance
+ estimation that deal with various deviation from the classical assumptions.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Further reading
+\series default
+: In this chapter all vectors are of finite dimensional.
+ Some results can be extended to allow infinite 
+\begin_inset Formula $K$
+\end_inset
+
+ when 
+\begin_inset Formula $K\to\infty$
+\end_inset
+
+ at a much slower speed than 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Such asymptotic development will require multiple indices, and it goes
+ beyond the simplest case of 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ that we learned here.
+ Big data is accompanied by big model, in which the model itself is indexed
+ by the sample size and can grow more sophisticated as 
+\begin_inset Formula $n$
+\end_inset
+
+ get bigger.
+ In the proofs of my latest paper 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "shi2020high"
+literal "false"
+
+\end_inset
+
+, You will find loads of inequality operations of similar flavor to this
+ chapter.
+\end_layout
+
+\begin_layout Section
+Appendix
+\end_layout
+
+\begin_layout Standard
+We introduce the 
+\begin_inset Quotes eld
+\end_inset
+
+big Op and small op
+\begin_inset Quotes erd
+\end_inset
+
+ notation.
+ They are the stochastic counterparts of the 
+\begin_inset Quotes eld
+\end_inset
+
+big O and small o
+\begin_inset Quotes erd
+\end_inset
+
+ notation in deterministic cases.
+\end_layout
+
+\begin_layout Itemize
+Small op: 
+\begin_inset Formula $x_{n}=o_{p}\left(r_{n}\right)$
+\end_inset
+
+ if 
+\begin_inset Formula $x_{n}/r_{n}\stackrel{p}{\to}0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+Big Op: 
+\begin_inset Formula $x_{n}=O_{p}\left(r_{n}\right)$
+\end_inset
+
+ if for any 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, there exists a 
+\begin_inset Formula $c>0$
+\end_inset
+
+ such that 
+\begin_inset Formula $P\left(\left|x_{n}\right|/r_{n}>c\right)<\varepsilon$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Some operations:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $o_{p}\left(1\right)+o_{p}\left(1\right)=o_{p}\left(1\right)$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $o_{p}\left(1\right)+O_{p}\left(1\right)=O_{p}\left(1\right)$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $o_{p}\left(1\right)O_{p}\left(1\right)=o_{p}\left(1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The big Op and small op notation allows us to keep using equalities in calculati
+on while expressing the stochastic order of random objects.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -1053,7 +1674,15 @@ status open
 
 
 \backslash
-qed
+bigskip
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ Zhentao Shi.
+ Oct 21, 2020.}
 \end_layout
 
 \end_inset
@@ -1062,101 +1691,11 @@ qed
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace medskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Example
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Keynesian-Type Macro Equations
-\end_layout
-
-\end_inset
-
- This is a model borrowed from Hayashi (2000, p.193) but originated from
- Haavelmo (1943).
- An econometrician is interested in learning 
-\begin_inset Formula $\beta_{2}$
-\end_inset
-
-, the marginal propensity of consumption, in the Keynesian-type equation
- 
-\begin_inset Formula 
-\begin{equation}
-C_{i}=\beta_{1}+\beta_{2}Y_{i}+u_{i}\label{eq:keynes}
-\end{equation}
-
-\end_inset
-
-where 
-\begin_inset Formula $C_{i}$
-\end_inset
-
- is household consumption, 
-\begin_inset Formula $Y_{i}$
-\end_inset
-
- is the GNP, and 
-\begin_inset Formula $u_{i}$
-\end_inset
-
- is the unobservable error.
- However, 
-\begin_inset Formula $Y_{i}$
-\end_inset
-
- and 
-\begin_inset Formula $C_{i}$
-\end_inset
-
- are connected by an accounting equality (with no error) 
-\begin_inset Formula 
-\[
-Y_{i}=C_{i}+I_{i},
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $I_{i}$
-\end_inset
-
- is investment.
- We assume 
-\begin_inset Formula $\E\left[u_{i}|I_{i}\right]=0$
-\end_inset
-
- as investment is determined in advance.
- OLS (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:keynes"
-
-\end_inset
-
-) will be inconsistent because in the reduced-form 
-\begin_inset Formula $Y_{i}=\frac{1}{1-\beta_{2}}\left(\beta_{1}+u_{i}+I_{i}\right)$
-\end_inset
-
- implies 
-\begin_inset Formula $\E\left[Y_{i}u_{i}\right]=\E\left[u_{i}^{2}\right]/\left(1-\beta_{2}\right)\neq0$
-\end_inset
-
-.
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-qed
-\end_layout
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "ref_teaching"
+options "chicagoa"
 
 \end_inset
 

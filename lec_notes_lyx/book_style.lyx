@@ -1,28 +1,34 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass extbook
+\textclass book
 \begin_preamble
 
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\lhead{Lecture Notes}
-\rhead{Zhentao Shi}
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\lhead{Lecture Notes}
+%\rhead{Zhentao Shi}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
 \end_preamble
 \use_default_options false
 \begin_modules
-theorems-ams
-theorems-ams-extended
+theorems-ams-chap-bytype
+theorems-ams-extended-chap-bytype
+knitr
 \end_modules
 \maintain_unincluded_children false
 \language english
 \language_package none
 \inputencoding auto
 \fontencoding default
-\font_roman "default" "default"
+\font_roman "palatino" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -32,16 +38,28 @@ theorems-ams-extended
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
 \graphics default
 \default_output_format default
 \output_sync 0
 \bibtex_command default
 \index_command default
 \paperfontsize 11
-\spacing double
-\use_hyperref false
+\spacing single
+\use_hyperref true
+\pdf_author "Zhentao Shi"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 2
 \use_package amssymb 2
 \use_package cancel 0
@@ -52,15 +70,17 @@ theorems-ams-extended
 \use_package stackrel 0
 \use_package stmaryrd 0
 \use_package undertilde 0
-\cite_engine basic
-\cite_engine_type default
-\biblio_style plain
-\use_bibtopic false
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style chicagoa
+\multibib child
+\use_bibtopic true
 \use_indices false
 \paperorientation portrait
 \suppress_date true
 \justification true
 \use_refstyle 0
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -73,7 +93,10 @@ theorems-ams-extended
 \tocdepth 1
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -87,11 +110,52 @@ theorems-ams-extended
 \begin_body
 
 \begin_layout Title
-Introductory Econometrics: A Companion
+Lecture Notes on Econometrics
 \end_layout
 
 \begin_layout Author
 Zhentao Shi
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{page}{2}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This PDF document is compiled as an overview of the contents to be covered
+ in Econ5121A.
+\end_layout
+
+\begin_layout Standard
+Don't print this document! All chapters will be revised as the course progresses.
 \end_layout
 
 \begin_layout Standard
@@ -103,8 +167,15 @@ LatexCommand tableofcontents
 
 \end_layout
 
-\begin_layout Chapter
-Review of Probability
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Basics
 \end_layout
 
 \begin_layout Standard
@@ -117,10 +188,6 @@ filename "lecture1.lyx"
 
 \end_layout
 
-\begin_layout Chapter
-Regression Model
-\end_layout
-
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand input
@@ -129,10 +196,6 @@ filename "lecture2.lyx"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Chapter
-Least Squares
 \end_layout
 
 \begin_layout Standard
@@ -145,10 +208,6 @@ filename "lecture3.lyx"
 
 \end_layout
 
-\begin_layout Chapter
-Large Sample Theory
-\end_layout
-
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand input
@@ -159,8 +218,8 @@ filename "lecture4.lyx"
 
 \end_layout
 
-\begin_layout Chapter
-Hypothesis Testing
+\begin_layout Part
+Core Theory
 \end_layout
 
 \begin_layout Standard
@@ -173,8 +232,14 @@ filename "lecture5.lyx"
 
 \end_layout
 
-\begin_layout Chapter
-Panel Data
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "lecture6.lyx"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -187,14 +252,44 @@ filename "lecture7.lyx"
 
 \end_layout
 
-\begin_layout Chapter
-Generalized Method of Moments
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "lecture8.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Applications
 \end_layout
 
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand input
-filename "lecture8.lyx"
+filename "lecture9.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "lecture10.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "lecture11.lyx"
 
 \end_inset
 

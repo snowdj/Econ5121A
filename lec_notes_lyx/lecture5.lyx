@@ -4,11 +4,11 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass article
+\textclass report
 \use_default_options false
 \begin_modules
-theorems-ams
-theorems-ams-extended
+theorems-ams-chap-bytype
+knitr
 \end_modules
 \maintain_unincluded_children false
 \language english
@@ -32,21 +32,20 @@ theorems-ams-extended
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 11
-\spacing single
+\paperfontsize 12
+\spacing double
 \use_hyperref true
 \pdf_bookmarks false
 \pdf_bookmarksnumbered false
 \pdf_bookmarksopen false
 \pdf_bookmarksopenlevel 1
 \pdf_breaklinks true
-\pdf_pdfborder false
-\pdf_colorlinks true
+\pdf_pdfborder true
+\pdf_colorlinks false
 \pdf_backref section
 \pdf_pdfusetitle false
-\pdf_quoted_options "urlcolor=urlcolor,linkcolor=linkcolor,citecolor=citecolor,"
 \papersize default
-\use_geometry true
+\use_geometry false
 \use_package amsmath 2
 \use_package amssymb 2
 \use_package cancel 0
@@ -57,9 +56,9 @@ theorems-ams-extended
 \use_package stackrel 0
 \use_package stmaryrd 0
 \use_package undertilde 0
-\cite_engine basic
-\cite_engine_type default
-\biblio_style plain
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plainnat
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -86,6 +85,7 @@ theorems-ams-extended
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\bullet 1 0 9 -1
 \tracking_changes false
 \output_changes false
 \html_math_output 0
@@ -95,336 +95,1793 @@ theorems-ams-extended
 
 \begin_body
 
-\begin_layout Title
-Panel Data
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{chapter}{4}
 \end_layout
 
-\begin_layout Author
-Zhentao Shi
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+An Introduction to Asymptotic Theory
+\end_layout
+
+\begin_layout Standard
+Our universe, though enormous, consists of fewer than 
+\begin_inset Formula $10^{82}$
+\end_inset
+
+ atoms, which is a finite number.
+ However, mathematical ideas are not bounded by secular realities.
+ Asymptotic theory is about behaviors of statistics when the sample size
+ is arbitrarily large up to infinity.
+ It is a set of approximation techniques to simplify complicated finite-sample
+ analysis.
+ Asymptotic theory is the cornerstone of modern econometrics.
+ It sheds lights on estimation and inference procedures under much more
+ general conditions than what are covered by exact finite sample theory.
+\end_layout
+
+\begin_layout Standard
+Nevertheless, we always have at hand a finite sample, and mostly it is difficult
+ to increase the sample size in reality.
+ Asymptotic theory rarely answers 
+\begin_inset Quotes eld
+\end_inset
+
+how large is large
+\begin_inset Quotes erd
+\end_inset
+
+, and we must be cautious about the treacherous landscape of 
+\emph on
+asymptopia
+\emph default
+.
+ In the era of big data, albeit the sheer size of data balloons dramatically,
+ we build more sophisticated models to better capture heterogeneity in the
+ data.
+ Large sample is a relative notion to the complexity of the model and underlying
+ (in)dependence structure of the data.
+\end_layout
+
+\begin_layout Standard
+Both the classical parametric approach, which is based on hard-to-verify
+ parametric assumptions, and the asymptotic approach, which is predicated
+ on imaginary infinite sequences, deviate from the reality.
+ Which approach is more constructive can only be judged case by case.
+ The prevalence of asymptotic theory is its mathematical amenability and
+ generality.
+ The law of evolution elevates asymptotic theory to the throne of mathematical
+ statistics of our time.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+The required mathematical level to work with asymptotic theory, seemingly
+ advance though, is lower than that for the finite sample theory.
+ The underlying economics theory predicts that for substitute goods, if
+ the price of one good is lowered, the demand increases.
+ 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
-Panel Data
-\begin_inset CommandInset label
-LatexCommand label
-name "panel-data"
-
-\end_inset
-
-
+Modes of Convergence
 \end_layout
 
 \begin_layout Standard
-Economists mostly work with observational data.
- The data generation process is out of the researchers' control.
- If we only have a cross sectional dataset at hand, it is difficult to control
- heterogeneity among the individuals.
- On the other hand, panel data offers a chance to control heterogeneity
- of some particular forms.
-\end_layout
-
-\begin_layout Standard
-A panel dataset tracks the same individuals across time 
-\begin_inset Formula $t=1,\ldots,T$
-\end_inset
-
-.
- We assume the observations are independent across 
-\begin_inset Formula $i=1,\ldots,n$
-\end_inset
-
-, while we allow some form of dependence within a group across 
-\begin_inset Formula $t=1,\ldots,T$
-\end_inset
-
- for the same 
-\begin_inset Formula $i$
-\end_inset
-
-.
- We maintain the linear equation 
-\begin_inset Formula 
-\begin{equation}
-y_{it}=\beta_{1}+x_{it}\beta_{2}+u_{it},\ i=1,\ldots,n;t=1,\ldots,T\label{eq:basic_eq}
-\end{equation}
-
-\end_inset
-
-where 
-\begin_inset Formula $u_{it}=\alpha_{i}+\epsilon_{it}$
-\end_inset
-
- is called the 
+We first review what is 
 \emph on
-composite error
+convergence
 \emph default
+ for a non-random sequence, which you learned in high school.
+ Let 
+\begin_inset Formula $z_{1},z_{2},\ldots$
+\end_inset
+
+ be an infinite sequence of non-random variables.
+ 
+\end_layout
+
+\begin_layout Definition
+Convergence of this non-random sequence means that for any 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, there exists an 
+\begin_inset Formula $N\left(\varepsilon\right)$
+\end_inset
+
+ such that for all 
+\begin_inset Formula $n>N\left(\varepsilon\right)$
+\end_inset
+
+, we have 
+\begin_inset Formula $\left|z_{n}-z\right|<\varepsilon$
+\end_inset
+
 .
- Note that 
-\begin_inset Formula $\alpha_{i}$
+ We say 
+\begin_inset Formula $z$
 \end_inset
 
- is the time-invariant unobserved heterogeneity, while 
-\begin_inset Formula $\epsilon_{it}$
+ is the limit of 
+\begin_inset Formula $z_{n}$
 \end_inset
 
- varies across individuals and time periods.
+, and write 
+\begin_inset Formula $z_{n}\to z$
+\end_inset
+
+ or 
+\begin_inset Formula $\lim_{n\to\infty}z_{n}=z$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The most important techniques of panel data estimation are the fixed effect
- regression and the random effect regression.
- The asymptotic distributions of both estimators can be derived from knowledge
- about the OLS regression.
- In this sense, panel data estimation becomes applied examples of the theory
- that we have covered in this course.
- It highlights the fundamental role of theory in econometrics.
+Instead of a deterministic sequence, we are interested in the convergence
+ of a sequence of random variables.
+ Since a random variable is 
+\begin_inset Quotes eld
+\end_inset
+
+random
+\begin_inset Quotes erd
+\end_inset
+
+ thanks to the induced probability measure by the measurable function, we
+ must be clear what 
+\emph on
+convergence
+\emph default
+ means.
+ Several modes of convergence are widely used.
 \end_layout
 
-\begin_layout Subsection
-Fixed Effect
+\begin_layout Definition
+
+\emph on
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+\emph off
+Convergence in probability
+\end_layout
+
+\end_inset
+
+
+\emph default
+ We say a sequence of random variables 
+\begin_inset Formula $\left(z_{n}\right)$
+\end_inset
+
+ converges in probability to 
+\begin_inset Formula $z$
+\end_inset
+
+, where 
+\begin_inset Formula $z$
+\end_inset
+
+ can be either a random variable or a non-random constant, if for any 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, the probability 
+\begin_inset Formula $P\left\{ \omega:\left|z_{n}\left(\omega\right)-z\right|<\varepsilon\right\} \to1$
+\end_inset
+
+ (or equivalently 
+\begin_inset Formula $P\left\{ \omega:\left|z_{n}\left(\omega\right)-z\right|\geq\varepsilon\right\} \to0$
+\end_inset
+
+) as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+ We can write 
+\begin_inset Formula $z_{n}\stackrel{p}{\to}z$
+\end_inset
+
+ or 
+\begin_inset Formula $\mathrm{plim}_{n\to\infty}z_{n}=z$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Squared-mean convergence
+\end_layout
+
+\end_inset
+
+ A sequence of random variables 
+\begin_inset Formula $\left(z_{n}\right)$
+\end_inset
+
+ converges in squared-mean to 
+\begin_inset Formula $z$
+\end_inset
+
+, where 
+\begin_inset Formula $z$
+\end_inset
+
+ can be either a random variable or a non-random constant, if 
+\begin_inset Formula $E\left[\left(z_{n}-z\right)^{2}\right]\to0.$
+\end_inset
+
+ It is denoted as 
+\begin_inset Formula $z_{n}\stackrel{m.s.}{\to}z$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition
+In these definitions either 
+\begin_inset Formula $P\left\{ \omega:\left|z_{n}\left(\omega\right)-z\right|>\varepsilon\right\} $
+\end_inset
+
+ or 
+\begin_inset Formula $E\left[\left(z_{n}-z\right)^{2}\right]$
+\end_inset
+
+ is a non-random quantity, and it converges to 0 as a non-random sequence.
+\end_layout
+
+\begin_layout Standard
+Squared-mean convergence is stronger than convergence in probability.
+ That is, 
+\begin_inset Formula $z_{n}\stackrel{m.s.}{\to}z$
+\end_inset
+
+ implies 
+\begin_inset Formula $z_{n}\stackrel{p}{\to}z$
+\end_inset
+
+ but the converse is untrue.
+ Here is an example.
+\end_layout
+
+\begin_layout Example
 \begin_inset CommandInset label
 LatexCommand label
-name "fixed-effect"
+name "eg:in_p_in_ms"
 
 \end_inset
 
 
+\begin_inset Formula $(z_{n})$
+\end_inset
+
+ is a sequence of binary random variables: 
+\begin_inset Formula $z_{n}=\sqrt{n}$
+\end_inset
+
+ with probability 
+\begin_inset Formula $1/n$
+\end_inset
+
+, and 
+\begin_inset Formula $z_{n}=0$
+\end_inset
+
+ with probability 
+\begin_inset Formula $1-1/n$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $z_{n}\stackrel{p}{\to}0$
+\end_inset
+
+ but 
+\begin_inset Formula $z_{n}\stackrel{m.s.}{\nrightarrow}0$
+\end_inset
+
+.
+ To verify these claims, notice that for any 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, we have 
+\begin_inset Formula $P\left(\omega:\left|z_{n}\left(\omega\right)-0\right|<\varepsilon\right)=P\left(\omega:z_{n}\left(\omega\right)=0\right)=1-1/n\rightarrow1$
+\end_inset
+
+ and thereby 
+\begin_inset Formula $z_{n}\stackrel{p}{\to}0$
+\end_inset
+
+.
+ On the other hand, 
+\begin_inset Formula $E\left[\left(z_{n}-0\right)^{2}\right]=n\cdot1/n+0\cdot(1-1/n)=1\nrightarrow0,$
+\end_inset
+
+ so 
+\begin_inset Formula $z_{n}\stackrel{m.s.}{\nrightarrow}0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Remark
+Example 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eg:in_p_in_ms"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ highlights the difference between the two modes of convergence.
+ Convergence in probability does not count what happens on a subset in the
+ sample space of small probability.
+ Squared-mean convergence deals with the average over the entire probability
+ space.
+ If a random variable can take a wild value, with small probability though,
+ it may blow away the squared-mean convergence.
+ On the contrary, such irregularity does not undermine convergence in probabilit
+y.
+ 
 \end_layout
 
 \begin_layout Standard
-OLS is consistent for the linear projection model.
- Since 
-\begin_inset Formula $\alpha_{i}$
+Both convergence in probability and squared-mean convergence are about convergen
+ce of random variables to a target random variable or constant.
+ That is, the distribution of 
+\begin_inset Formula $z_{n}-z$
 \end_inset
 
- is unobservable, it is absorbed into the composite error 
-\begin_inset Formula $u_{it}=\alpha_{i}+\epsilon_{it}$
+ is concentrated around 0 as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+ Instead, 
+\emph on
+convergence in distribution
+\emph default
+ is about the convergence of CDF, but not the random variable.
+ Let 
+\begin_inset Formula $F_{z_{n}}\left(\cdot\right)$
+\end_inset
+
+ be the CDF of 
+\begin_inset Formula $z_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $F_{z}\left(\cdot\right)$
+\end_inset
+
+ be the CDF of 
+\begin_inset Formula $z$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Convergence in distribution
+\end_layout
+
+\end_inset
+
+ We say a sequence of random variables 
+\begin_inset Formula $\left(z_{n}\right)$
+\end_inset
+
+ converges in distribution to a random variable 
+\begin_inset Formula $z$
+\end_inset
+
+ if 
+\begin_inset Formula $F_{z_{n}}\left(a\right)\to F_{z}\left(a\right)$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ at each point 
+\begin_inset Formula $a\in\mathbb{R}$
+\end_inset
+
+ such that where 
+\begin_inset Formula $F_{z}\left(\cdot\right)$
+\end_inset
+
+ is continuous.
+ We write 
+\begin_inset Formula $z_{n}\stackrel{d}{\to}z$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition
+Convergence in distribution is the weakest mode.
+ If 
+\begin_inset Formula $z_{n}\stackrel{p}{\to}z$
+\end_inset
+
+, then 
+\begin_inset Formula $z_{n}\stackrel{d}{\to}z$
+\end_inset
+
+.
+ The converse is not true in general, unless 
+\begin_inset Formula $z$
+\end_inset
+
+ is a non-random constant (A constant 
+\begin_inset Formula $z$
+\end_inset
+
+ can be viewed as a degenerate random variables, with a corresponding 
+\begin_inset Quotes eld
+\end_inset
+
+CDF
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $F_{z}\left(\cdot\right)=1\left\{ \cdot\geq z\right\} $
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example
+Let 
+\begin_inset Formula $x\sim N\left(0,1\right)$
 \end_inset
 
 .
  If 
-\begin_inset Formula $\mathrm{cov}\left(\alpha_{i},x_{it}\right)=0$
+\begin_inset Formula $z_{n}=x+1/n$
 \end_inset
 
-, the OLS is consistent; otherwise the consistency breaks down.
- The fixed effect model allows 
-\begin_inset Formula $\alpha_{i}$
+, then 
+\begin_inset Formula $z_{n}\stackrel{p}{\to}x$
 \end_inset
 
- and 
-\begin_inset Formula $x_{it}$
-\end_inset
-
- to be arbitrarily correlated.
- The trick to regain consistency is to eliminate 
-\begin_inset Formula $\alpha_{i},i=1,\ldots,n$
-\end_inset
-
- .
- The rest of this section develops the consistency and asymptotic distribution
- of the 
-\emph on
-within estimator
-\emph default
-, the default fixed-effect (FE) estimator.
- The within estimator transforms the data by subtracting all the observable
- variables by the corresponding group means.
- Averaging the 
-\begin_inset Formula $T$
-\end_inset
-
- equations of the original regression for the same 
-\begin_inset Formula $i$
-\end_inset
-
-, we have 
-\begin_inset Formula 
-\begin{equation}
-\overline{y}_{i}=\beta_{1}+\overline{x}_{i}\beta_{2}+\bar{u}_{it}=\beta_{1}+\overline{x}_{i}\beta_{2}+\alpha_{i}+\bar{\epsilon}_{it}.\label{eq:group_mean}
-\end{equation}
-
-\end_inset
-
-where 
-\begin_inset Formula $\overline{y}_{i}=\frac{1}{T}\sum_{t=1}^{T}y_{it}$
+ and of course 
+\begin_inset Formula $z_{n}\stackrel{d}{\to}x$
 \end_inset
 
 .
- Subtracting the averaged equation from the original equation gives 
-\begin_inset Formula 
-\begin{equation}
-\tilde{y}_{it}=\tilde{x}_{it}\beta_{2}+\tilde{\epsilon}_{it}\label{eq:FE_demean}
-\end{equation}
-
+ However, if 
+\begin_inset Formula $z_{n}=-x+1/n$
 \end_inset
 
-where 
-\begin_inset Formula $\tilde{y}_{it}=y_{it}-\overline{y}_{i}$
+, or 
+\begin_inset Formula $z_{n}=y+1/n$
+\end_inset
+
+ where 
+\begin_inset Formula $y\sim N\left(0,1\right)$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $x$
+\end_inset
+
+, then 
+\begin_inset Formula $z_{n}\stackrel{d}{\to}x$
+\end_inset
+
+ but 
+\begin_inset Formula $z_{n}\stackrel{p}{\nrightarrow}x$
 \end_inset
 
 .
- We then run OLS with the demeaned data, and obtain the within estimator
- 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula $(z_{n})$
+\end_inset
+
+ is a sequence of binary random variables: 
+\begin_inset Formula $z_{n}=n$
+\end_inset
+
+ with probability 
+\begin_inset Formula $1/\sqrt{n}$
+\end_inset
+
+, and 
+\begin_inset Formula $z_{n}=0$
+\end_inset
+
+ with probability 
+\begin_inset Formula $1-1/\sqrt{n}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $z_{n}\stackrel{d}{\to}z=0.$
+\end_inset
+
+ Because 
 \begin_inset Formula 
 \[
-\widehat{\beta}_{2}^{FE}=\left(\tilde{X}'\tilde{X}\right)^{-1}\tilde{X}'\tilde{y},
+F_{z_{n}}\left(a\right)=\begin{cases}
+0 & a<0\\
+1-1/\sqrt{n} & 0\leq a\leq n\\
+1 & a\geq n
+\end{cases}.
 \]
 
 \end_inset
 
-where 
-\begin_inset Formula $\tilde{y}=\left(y_{it}\right)_{i,t}$
+ 
+\begin_inset Formula $F_{z}\left(a\right)=\begin{cases}
+0, & a<0\\
+1 & a\geq0
+\end{cases}$
 \end_inset
 
- stacks all the 
-\begin_inset Formula $nT$
+.
+ It is easy to verify that 
+\begin_inset Formula $F_{z_{n}}\left(a\right)$
 \end_inset
 
- observations into a vector, and similarly defined is 
-\begin_inset Formula $\tilde{X}$
+ converges to 
+\begin_inset Formula $F_{z}\left(a\right)$
 \end_inset
 
- as an 
-\begin_inset Formula $nT\times K$
+ 
+\emph on
+pointwisely
+\emph default
+ on each point in 
+\begin_inset Formula $\left(-\infty,0\right)\cup\left(0,+\infty\right)$
 \end_inset
 
- matrix, where 
-\begin_inset Formula $K$
+, where 
+\begin_inset Formula $F_{z}\left(a\right)$
 \end_inset
 
- is the dimension of 
-\begin_inset Formula $\beta_{2}$
+ is continuous.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+However, under the 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ distance with respect to the Lebesgue measure on the real line, the function
+ 
+\begin_inset Formula $F_{z_{n}}$
+\end_inset
+
+ does not converge to 
+\begin_inset Formula $F_{z}$
+\end_inset
+
+ since 
+\begin_inset Formula $\left\Vert F_{z_{n}}-F_{z}\right\Vert _{2}=\sqrt{\int_{-\infty}^{\infty}\left(F_{z_{n}}\left(a\right)-F_{z}\left(a\right)\right)^{2}da}=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
 \end_inset
 
 .
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
-We know that OLS would be consistent if 
-\begin_inset Formula $E\left[\tilde{\epsilon}_{it}|\tilde{x}_{it}\right]=0$
+So far we have talked about convergence of scalar variables.
+ These three modes of converges can be easily generalized to random vectors.
+ In particular, the 
+\emph on
+Cramer-Wold device
+\emph default
+ collapses a random vector into a random vector via arbitrary linear combination.
+ We say a sequence of 
+\begin_inset Formula $K$
+\end_inset
+
+-dimensional random vectors 
+\begin_inset Formula $\left(z_{n}\right)$
+\end_inset
+
+ converge in distribution to 
+\begin_inset Formula $z$
+\end_inset
+
+ if 
+\begin_inset Formula $\lambda'z_{n}\stackrel{d}{\to}\lambda'z$
+\end_inset
+
+ for any 
+\begin_inset Formula $\lambda\in\mathbb{R}^{K}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\Vert \lambda\right\Vert _{2}=1.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Law of Large Numbers
+\end_layout
+
+\begin_layout Standard
+(Weak) law of large numbers (LLN) is a collection of statements about convergenc
+e in probability of the sample average to its population counterpart.
+ The basic form of LLN is: 
+\begin_inset Formula 
+\[
+\frac{1}{n}\sum_{i=1}^{n}(z_{i}-E[z_{i}])\stackrel{p}{\to}0
+\]
+
+\end_inset
+
+as 
+\begin_inset Formula $n\to\infty$
 \end_inset
 
 .
- Below we provide a sufficient condition, which is often called 
+ Various versions of LLN work under different assumptions about some features
+ and/or dependence of the underlying random variables.
+\end_layout
+
+\begin_layout Subsection
+Cherbyshev LLN
+\end_layout
+
+\begin_layout Standard
+We illustrate LLN by the simple example of Chebyshev LLN, which can be proved
+ by elementary calculation.
+ It utilizes the
 \emph on
-strict exogeneity
+ Chebyshev inequality
 \emph default
 .
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 
-\series bold
-Assumption FE.1
-\series default
+\emph on
+Chebyshev inequality
+\emph default
+: If a random variable 
+\begin_inset Formula $x$
+\end_inset
+
+ has a finite second moment 
+\begin_inset Formula $E\left[x^{2}\right]<\infty$
+\end_inset
+
+, then we have 
+\begin_inset Formula $P\left\{ \left|x\right|>\varepsilon\right\} \leq E\left[x^{2}\right]/\varepsilon^{2}$
+\end_inset
+
+ for any constant 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+.
  
-\begin_inset Formula $E\left[\epsilon_{it}|\alpha_{i},\mathbf{x}_{i}\right]=0$
+\end_layout
+
+\begin_layout Exercise
+Show that if 
+\begin_inset Formula $r_{2}\geq r_{1}\geq1$
 \end_inset
 
- where 
-\begin_inset Formula $\mathbf{x}_{i}=\left(x_{i1},\ldots,x_{iT}\right)$
+, then 
+\begin_inset Formula $E\left[\left|x\right|^{r_{2}}\right]<\infty$
+\end_inset
+
+ implies 
+\begin_inset Formula $E\left[\left|x\right|^{r_{1}}\right]<\infty.$
+\end_inset
+
+ (Hint: use Holder's inequality.)
+\end_layout
+
+\begin_layout Standard
+The Chebyshev inequality is a special case of the 
+\emph on
+Markov inequality
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Markov inequality
+\emph default
+: If a random variable 
+\begin_inset Formula $x$
+\end_inset
+
+ has a finite 
+\begin_inset Formula $r$
+\end_inset
+
+-th absolute moment 
+\begin_inset Formula $E\left[\left|x\right|^{r}\right]<\infty$
+\end_inset
+
+ for some 
+\begin_inset Formula $r\ge1$
+\end_inset
+
+, then we have 
+\begin_inset Formula $P\left\{ \left|x\right|>\varepsilon\right\} \leq E\left[\left|x\right|^{r}\right]/\varepsilon^{r}$
+\end_inset
+
+ any constant 
+\begin_inset Formula $\varepsilon>0$
 \end_inset
 
 .
 \end_layout
 
-\begin_layout Standard
-Its strictness is relative to the contemporary exogeneity 
-\begin_inset Formula $E\left[\epsilon_{it}|\alpha_{i},x_{it}\right]=0$
+\begin_layout Proof
+It is easy to verify the Markov inequality.
+ 
+\begin_inset Formula 
+\[
+\begin{aligned}E\left[\left|x\right|^{r}\right] & =\int_{\left|x\right|>\varepsilon}\left|x\right|^{r}dF_{X}+\int_{\left|x\right|\leq\varepsilon}\left|x\right|^{r}dF_{X}\\
+ & \geq\int_{\left|x\right|>\varepsilon}\left|x\right|^{r}dF_{X}\\
+ & \geq\varepsilon^{r}\int_{\left|x\right|>\varepsilon}dF_{X}=\varepsilon^{r}P\left\{ \left|x\right|>\varepsilon\right\} .
+\end{aligned}
+\]
+
 \end_inset
 
-.
- FE.1 is more restrictive as it assumes that the error 
-\begin_inset Formula $\epsilon_{it}$
-\end_inset
-
- is mean independent of the past, present and future explanatory variables.
+Rearrange the above inequality and we obtain the Markov inequality.
 \end_layout
 
 \begin_layout Standard
-When we talk about the consistency in panel data, typically we are considering
+Let the 
+\emph on
+partial sum
+\emph default
+ 
+\begin_inset Formula $S_{n}=\sum_{i=1}^{n}x_{i}$
+\end_inset
+
+, where 
+\begin_inset Formula $\mu_{i}=E\left[x_{i}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma_{i}^{2}=\mathrm{var}\left[x_{i}\right]$
+\end_inset
+
+.
+ We apply the Chebyshev inequality to the sample mean 
+\begin_inset Formula $z_{n}=\overline{x}-\bar{\mu}=n^{-1}\left(S_{n}-E\left[S_{n}\right]\right)$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align}
+P\left\{ \left|z_{n}\right|\geq\varepsilon\right\}  & =P\left\{ n^{-1}\left|S_{n}-E\left[S_{n}\right]\right|\geq\varepsilon\right\} \nonumber \\
+ & \leq E\left[\left(n^{-1}\sum_{i=1}^{n}\left(x_{i}-\mu_{i}\right)\right)^{2}\right]/\varepsilon^{2}\nonumber \\
+ & =\left(n\varepsilon\right)^{-2}\left\{ E\left[\sum_{i=1}^{n}\left(x_{i}-\mu_{i}\right)^{2}\right]+\sum_{i=1}^{n}\sum_{j\neq i}E\left[\left(x_{i}-\mu_{i}\right)\left(x_{j}-\mu_{j}\right)\right]\right\} \nonumber \\
+ & =\left(n\varepsilon\right)^{-2}\left\{ \sum_{i=1}^{n}\mathrm{var}\left(x_{i}\right)+\sum_{i=1}^{n}\sum_{j\neq i}\mathrm{cov}\left(x_{i},x_{j}\right)\right\} .\label{eq:cheby_mean}
+\end{align}
+
+\end_inset
+
+ Convergence in probability holds if the right-hand side shrinks to 0 as
  
 \begin_inset Formula $n\to\infty$
 \end_inset
 
- while 
-\begin_inset Formula $T$
+.
+ For example, If 
+\begin_inset Formula $x_{1},\ldots,x_{n}$
 \end_inset
 
- stays fixed.
- This asymptotic framework is appropriate for panel datasets with many individua
-ls but only a few time periods.
+ are iid with 
+\begin_inset Formula $\mathrm{var}\left(x_{1}\right)=\sigma^{2}$
+\end_inset
+
+, then the RHS of (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cheby_mean"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) is 
+\begin_inset Formula $\left(n\varepsilon\right)^{-2}\left(n\sigma^{2}\right)=o\left(n^{-1}\right)\to0$
+\end_inset
+
+.
+ This result gives the Chebyshev LLN:
+\end_layout
+
+\begin_layout Itemize
+Chebyshev LLN: If 
+\begin_inset Formula $\left(z_{1},\ldots,z_{n}\right)$
+\end_inset
+
+ is a sample of iid observations, 
+\begin_inset Formula $E\left[z_{1}\right]=\mu$
+\end_inset
+
+ , and 
+\begin_inset Formula $\sigma^{2}=\mathrm{var}\left[z_{1}\right]<\infty$
+\end_inset
+
+ exists, then 
+\begin_inset Formula $\frac{1}{n}\sum_{i=1}^{n}z_{i}\stackrel{p}{\to}\mu.$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-
-\series bold
-Proposition
-\series default
- If FE.1 is satisfied, then 
-\begin_inset Formula $\widehat{\beta}_{2}^{FE}$
-\end_inset
-
- is consistent.
+The convergence in probability can be indeed maintained under much more
+ general conditions than under iid case.
+ The random variables in the sample do not have to be identically distributed,
+ and they do not have to be independent either.
 \end_layout
 
-\begin_layout Standard
-The variance estimation for the FE estimator is a little bit tricky.
- We assume a homoskedasitcity condition to simplify the calculation.
- Violation of this assumption changes the form of the asymptotic variance,
- but does not jeopardize the asymptotic normality.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Assumption FE.2
-\series default
- 
-\begin_inset Formula $\mathrm{var}\left(\epsilon_{i}|\alpha_{i},\mathbf{x}_{i}\right)=\sigma_{\epsilon}^{2}I_{T}$
+\begin_layout Exercise
+Consider an inid (independent but non-identically distributed) sample 
+\begin_inset Formula $\left(x_{1},\ldots,x_{n}\right)$
 \end_inset
 
- for all 
-\begin_inset Formula $i$
+ with 
+\begin_inset Formula $E\left[x_{i}\right]=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{var}\left[x_{i}\right]=\sqrt{n}c$
+\end_inset
+
+ for some constant 
+\begin_inset Formula $c>0$
+\end_inset
+
+.
+ Use the Chebyshev inequality to show that 
+\begin_inset Formula $n^{-1}\sum_{i=1}^{n}x_{i}\stackrel{p}{\to}0$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-Under FE.1 and FE.2, 
-\begin_inset Formula $\widehat{\sigma}_{\epsilon}^{2}=\frac{1}{n\left(T-1\right)}\sum_{i=1}^{n}\sum_{t=1}^{T}\widehat{\tilde{\epsilon}}_{it}^{2}$
+\begin_inset Separator plain
 \end_inset
 
- is a consistent estimator of 
-\begin_inset Formula $\sigma_{\epsilon}^{2}$
+
+\end_layout
+
+\begin_layout Exercise
+Consider the time series moving average model 
+\begin_inset Formula $x_{i}=\varepsilon_{i}+\theta\varepsilon_{i-1}$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,\ldots,n$
 \end_inset
 
 , where 
-\begin_inset Formula $\widehat{\tilde{\epsilon}}=\tilde{y}_{it}-\tilde{x}_{it}\widehat{\beta}_{2}^{FE}$
+\begin_inset Formula $\left|\theta\right|<1$
+\end_inset
+
+, 
+\begin_inset Formula $E\left[\varepsilon_{i}\right]=0$
+\end_inset
+
+, 
+\begin_inset Formula $\mathrm{var}\left[\varepsilon_{i}\right]=\sigma^{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $\left(\varepsilon_{i}\right)_{i=0}^{n}$
+\end_inset
+
+ iid.
+ Use the Chebyshev inequality to show that 
+\begin_inset Formula $n^{-1}\sum_{i=1}^{n}x_{i}\stackrel{p}{\to}0$
 \end_inset
 
 .
- Note that the denominator is 
-\begin_inset Formula $n\left(T-1\right)$
-\end_inset
-
-, not 
-\begin_inset Formula $nT$
-\end_inset
-
-.
- The necessity of adjusting the degree of freedom can be easily seen from
- the FWL theorem: the FE estimator for the slope coefficient is numerical
- the same as its counterpart in the full regression with a dummy variable
- for each cross sectional unit.
 \end_layout
 
 \begin_layout Standard
-If FE.1 and FE.2 are satisfied, then 
+Another useful LLN is the 
+\emph on
+Kolmogorov LLN
+\emph default
+.
+ Since its derivation requires more advanced knowledge of probability theory,
+ we state the result without proof.
+\end_layout
+
+\begin_layout Itemize
+Kolmogorov LLN: If 
+\begin_inset Formula $\left(z_{1},\ldots,z_{n}\right)$
+\end_inset
+
+ is a sample of iid observations and 
+\begin_inset Formula $E\left[z_{1}\right]=\mu$
+\end_inset
+
+ exists, then 
+\begin_inset Formula $\frac{1}{n}\sum_{i=1}^{n}z_{i}\stackrel{p}{\to}\mu$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Compared with the Chebyshev LLN, the Kolmogorov LLN only requires the existence
+ of the population mean, but not any higher moments.
+ On the other hand, iid is essential for the Kolmogorov LLN.
+\end_layout
+
+\begin_layout Example
+Consider three distributions: standard normal 
+\begin_inset Formula $N\left(0,1\right)$
+\end_inset
+
+, 
+\begin_inset Formula $t\left(2\right)$
+\end_inset
+
+ (zero mean, infinite variance), and the Cauchy distribution (no moments
+ exist).
+ We plot paths of the sample average with 
+\begin_inset Formula $n=2^{1},2^{2},\ldots,2^{20}$
+\end_inset
+
+.
+ We will see that the sample averages of 
+\begin_inset Formula $N\left(0,1\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $t\left(2\right)$
+\end_inset
+
+ converge, but that of the Cauchy distribution does not.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+sample.mean = function( n, distribution ){
+\end_layout
+
+\begin_layout Plain Layout
+
+  # get sample mean for a given distribution
+\end_layout
+
+\begin_layout Plain Layout
+
+  if (distribution == "normal"){ y = rnorm( n ) } 
+\end_layout
+
+\begin_layout Plain Layout
+
+  else if (distribution == "t2") {y = rt(n, 2) }
+\end_layout
+
+\begin_layout Plain Layout
+
+  else if (distribution == "cauchy") {y = rcauchy(n) }
+\end_layout
+
+\begin_layout Plain Layout
+
+  return( mean(y) )
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+LLN.plot = function(distribution){
+\end_layout
+
+\begin_layout Plain Layout
+
+  # draw the sample mean graph
+\end_layout
+
+\begin_layout Plain Layout
+
+  ybar = matrix(0, length(NN), 3 )
+\end_layout
+
+\begin_layout Plain Layout
+
+  for (rr in 1:3){
+\end_layout
+
+\begin_layout Plain Layout
+
+    for ( ii in 1:length(NN)){
+\end_layout
+
+\begin_layout Plain Layout
+
+      n = NN[ii]; ybar[ii, rr] = sample.mean(n, distribution)
+\end_layout
+
+\begin_layout Plain Layout
+
+    }  
+\end_layout
+
+\begin_layout Plain Layout
+
+  }
+\end_layout
+
+\begin_layout Plain Layout
+
+  matplot(ybar, type = "l", ylab = "mean", xlab = "", 
+\end_layout
+
+\begin_layout Plain Layout
+
+       lwd = 1, lty = 1, main = distribution)
+\end_layout
+
+\begin_layout Plain Layout
+
+  abline(h = 0, lty = 2)
+\end_layout
+
+\begin_layout Plain Layout
+
+  return(ybar)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+# calculation
+\end_layout
+
+\begin_layout Plain Layout
+
+NN = 2^(1:20); set.seed(2020-10-7); par(mfrow = c(3,1))
+\end_layout
+
+\begin_layout Plain Layout
+
+l1 = LLN.plot("normal"); l2 = LLN.plot("t2"); l3 = LLN.plot("cauchy")
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Central Limit Theorem
+\end_layout
+
+\begin_layout Standard
+The central limit theorem (CLT) is a collection of probability results about
+ the convergence in distribution to a stable distribution.
+ The limiting distribution is usually the Gaussian distribution.
+ The basic form of the CLT is:
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Under some conditions to be spelled out
+\emph default
+, the sample average of 
+\emph on
+zero-mean
+\emph default
+ random variables 
+\begin_inset Formula $\left(z_{1},\ldots,z_{n}\right)$
+\end_inset
+
+ multiplied by 
+\begin_inset Formula $\sqrt{n}$
+\end_inset
+
+ satisfies 
 \begin_inset Formula 
 \[
-\left(\widehat{\sigma}_{\epsilon}^{2}\left(\tilde{X}'\tilde{X}\right)^{-1}\right)^{-1/2}\left(\widehat{\beta}_{2}^{FE}-\beta_{2}^{0}\right)\stackrel{d}{\to}N\left(0,I_{K}\right).
+\frac{1}{\sqrt{n}}\sum_{i=1}^{n}z_{i}\stackrel{d}{\to}N\left(0,\sigma^{2}\right)
+\]
+
+\end_inset
+
+as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Various versions of CLT work under different assumptions about the random
+ variables.
+ 
+\emph on
+Lindeberg-Levy CLT
+\emph default
+ is the simplest CLT.
+\end_layout
+
+\begin_layout Itemize
+If the sample 
+\begin_inset Formula $\left(x_{1},\ldots,x_{n}\right)$
+\end_inset
+
+ is iid, 
+\begin_inset Formula $E\left[x_{1}\right]=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{var}\left[x_{1}\right]=\sigma^{2}<\infty$
+\end_inset
+
+, then 
+\begin_inset Formula $\frac{1}{\sqrt{n}}\sum_{i=1}^{n}x_{i}\stackrel{d}{\to}N\left(0,\sigma^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Lindeberg-Levy CLT can be proved by the 
+\emph on
+moment generating function
+\emph default
+.
+ For any random variable 
+\begin_inset Formula $x$
+\end_inset
+
+, the function 
+\begin_inset Formula $M_{x}\left(t\right)=E\left[\exp\left(xt\right)\right]$
+\end_inset
+
+ is called its the 
+\emph on
+moment generating function
+\emph default
+ (MGF) if it exists.
+ MGF fully describes a distribution, just like PDF or CDF.
+ For example, the MGF of 
+\begin_inset Formula $N\left(\mu,\sigma^{2}\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\exp\left(\mu t+\frac{1}{2}\sigma^{2}t^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Heuristic proof of Lindeberg-Levy CLT
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $E\left[\left|x\right|^{k}\right]<\infty$
+\end_inset
+
+ for a positive integer 
+\begin_inset Formula $k$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+M_{X}\left(t\right)=1+tE\left[X\right]+\frac{t^{2}}{2}E\left[X^{2}\right]+\ldots\frac{t}{k!}E\left[X^{k}\right]+O\left(t^{k+1}\right).
+\]
+
+\end_inset
+
+Under the assumption of Lindeberg-Levy CLT, 
+\begin_inset Formula 
+\[
+M_{\frac{X_{i}}{\sqrt{n}}}\left(t\right)=1+\frac{t^{2}}{2n}\sigma^{2}+O\left(\frac{t^{3}}{n^{3/2}}\right)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $i$
+\end_inset
+
+, and by independence we have 
+\begin_inset Formula 
+\[
+\begin{aligned}M_{\frac{1}{\sqrt{n}}\sum_{i=1}^{n}x_{i}}\left(t\right) & =\prod_{i=1}^{n}M_{\frac{X_{i}}{\sqrt{n}}}\left(t\right)=\left(1+\frac{t^{2}}{2n}\sigma^{2}+O\left(\frac{t^{3}}{n^{3/2}}\right)\right)^{n}\\
+ & \to\exp\left(\frac{\sigma^{2}}{2}t^{2}\right),
+\end{aligned}
+\]
+
+\end_inset
+
+where the limit is exactly the characteristic function of 
+\begin_inset Formula $N\left(0,\sigma^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Remark
+This proof with MGF is simple and elementary.
+ Its drawback is that not all distributions have a well-defined MGF.
+ A more general proof can be carried out by replacing MGF with the 
+\emph on
+characteristic function
+\emph default
+ 
+\begin_inset Formula $\varphi_{x}\left(t\right)=E\left[\exp\left(\mathrm{i}xt\right)\right]$
+\end_inset
+
+, where 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $\mathrm{i}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ is the imaginary number.
+ The characteristic function is the 
+\emph on
+Fourier transform
+\emph default
+ of the probability measure and it always exists.
+ Such a proof will require background knowledge of Fourier transform and
+ inverse transform, which we do not pursuit here.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Lindeberg-Levy CLT is easy to verify by the characteristic function.
+ For any random variable 
+\begin_inset Formula $x$
+\end_inset
+
+, the function 
+\begin_inset Formula $\varphi_{x}\left(t\right)=E\left[\exp\left(ixt\right)\right]$
+\end_inset
+
+ is called its 
+\emph on
+characteristic function
+\emph default
+.
+ The characteristic function fully describes a distribution, just like PDF
+ or CDF.
+ For example, the characteristic function of 
+\begin_inset Formula $N\left(\mu,\sigma^{2}\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\exp\left(it\mu-\frac{1}{2}\sigma^{2}t^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+Here is a very heuristic argument.
+ If 
+\begin_inset Formula $E\left[\left|x\right|^{k}\right]<\infty$
+\end_inset
+
+ for a positive integer 
+\begin_inset Formula $k$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\varphi_{X}\left(t\right)=1+itE\left[X\right]+\frac{\left(it\right)^{2}}{2}E\left[X^{2}\right]+\ldots\frac{\left(it\right)^{k}}{k!}E\left[X^{k}\right]+o\left(t^{k}\right).
+\]
+
+\end_inset
+
+Under the assumption of Lindeberg-Levy CLT, 
+\begin_inset Formula 
+\[
+\varphi_{X_{i}/\sqrt{n}}\left(t\right)=1-\frac{t^{2}}{2n}\sigma^{2}+o\left(\frac{t^{2}}{n}\right)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $i$
+\end_inset
+
+, and by independence we have 
+\begin_inset Formula 
+\[
+\begin{aligned}\varphi_{\frac{1}{\sqrt{n}}\sum_{i=1}^{n}x_{i}}\left(t\right) & =\prod_{i=1}^{n}\varphi_{x_{i}/\sqrt{n}}\left(t\right)=\left(1+i\cdot0-\frac{t^{2}}{2n}\sigma^{2}+o\left(\frac{t^{2}}{n}\right)\right)^{n}\\
+ & \to\exp\left(-\frac{\sigma^{2}}{2}t^{2}\right),
+\end{aligned}
+\]
+
+\end_inset
+
+where the limit is exactly the characteristic function of 
+\begin_inset Formula $N\left(0,\sigma^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Lindeberg-Feller CLT: 
+\begin_inset Formula $\left(x_{i}\right)_{i=1}^{n}$
+\end_inset
+
+ is inid.
+ If the 
+\emph on
+Lindeberg condition
+\emph default
+ is satisfied (for any fixed 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, 
+\begin_inset Formula $\frac{1}{s_{n}^{2}}\sum_{i=1}^{n}E\left[x_{i}^{2}\cdot\boldsymbol{1}\left\{ \left|x_{i}\right|\geq\varepsilon s_{n}\right\} \right]\to0$
+\end_inset
+
+ where 
+\begin_inset Formula $s_{n}=\sqrt{\sum_{i=1}^{n}\sigma_{i}^{2}}$
+\end_inset
+
+), then we have 
+\begin_inset Formula 
+\[
+\frac{\sum_{i=1}^{n}x_{i}}{s_{n}}\stackrel{d}{\to}N\left(0,1\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Lyapunov CLT: 
+\begin_inset Formula $\left(x_{i}\right)_{i=1}^{n}$
+\end_inset
+
+ is inid.
+ If 
+\begin_inset Formula $\max_{i\leq n}E\left[\left|x_{i}\right|^{3}\right]<C<\infty,$
+\end_inset
+
+ then we have 
+\begin_inset Formula 
+\[
+\frac{\sum_{i=1}^{n}x_{i}}{s_{n}}\stackrel{d}{\to}N\left(0,1\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is a simulated example.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+Z_fun = function(n, distribution){
+\end_layout
+
+\begin_layout Plain Layout
+
+  if (distribution == "normal"){
+\end_layout
+
+\begin_layout Plain Layout
+
+      z = sqrt(n) * mean(rnorm(n))
+\end_layout
+
+\begin_layout Plain Layout
+
+	} else if (distribution == "chisq2") {
+\end_layout
+
+\begin_layout Plain Layout
+
+      df = 2; 
+\end_layout
+
+\begin_layout Plain Layout
+
+      x = rchisq(n,2)
+\end_layout
+
+\begin_layout Plain Layout
+
+      z = sqrt(n) * ( mean(x) - df ) / sqrt(2*df)
+\end_layout
+
+\begin_layout Plain Layout
+
+      }
+\end_layout
+
+\begin_layout Plain Layout
+
+  return (z)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+CLT_plot = function(n, distribution){
+\end_layout
+
+\begin_layout Plain Layout
+
+  Rep = 10000
+\end_layout
+
+\begin_layout Plain Layout
+
+  ZZ = rep(0, Rep)
+\end_layout
+
+\begin_layout Plain Layout
+
+  for (i in 1:Rep) {ZZ[i] = Z_fun(n, distribution)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  xbase = seq(-4.0, 4.0, length.out = 100)
+\end_layout
+
+\begin_layout Plain Layout
+
+  hist( ZZ, breaks = 100, freq = FALSE, 
+\end_layout
+
+\begin_layout Plain Layout
+
+    xlim = c( min(xbase), max(xbase) ),
+\end_layout
+
+\begin_layout Plain Layout
+
+    main = paste0(
+\begin_inset Quotes eld
+\end_inset
+
+hist with sample size 
+\begin_inset Quotes erd
+\end_inset
+
+, n) )
+\end_layout
+
+\begin_layout Plain Layout
+
+  lines(x = xbase, y = dnorm(xbase), col = "red")
+\end_layout
+
+\begin_layout Plain Layout
+
+  return (ZZ)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+par(mfrow = c(3,1))
+\end_layout
+
+\begin_layout Plain Layout
+
+phist = CLT_plot(2, "chisq2")
+\end_layout
+
+\begin_layout Plain Layout
+
+phist = CLT_plot(10, "chisq2")
+\end_layout
+
+\begin_layout Plain Layout
+
+phist = CLT_plot(100, "chisq2")
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Tools for Transformations
+\end_layout
+
+\begin_layout Standard
+In their original forms, LLN deals with the sample mean, and CLT handles
+ the scaled (by 
+\begin_inset Formula $\sqrt{n}$
+\end_inset
+
+) and/or standardized (by standard deviation) sample mean.
+ However, most of the econometric estimators of interest are functions of
+ sample means.
+ For example, in the OLS estimator 
+\begin_inset Formula 
+\[
+\widehat{\beta}=\left(\frac{1}{n}\sum_{i}x_{i}x_{i}'\right)^{-1}\frac{1}{n}\sum_{i}x_{i}y_{i}
+\]
+
+\end_inset
+
+ involves matrix inverse and the matrix-vector multiplication.
+ We need tools to handle transformations.
+\end_layout
+
+\begin_layout Itemize
+Continuous mapping theorem 1: If 
+\begin_inset Formula $x_{n}\stackrel{p}{\to}a$
+\end_inset
+
+ and 
+\begin_inset Formula $f\left(\cdot\right)$
+\end_inset
+
+ is continuous at 
+\begin_inset Formula $a$
+\end_inset
+
+, then 
+\begin_inset Formula $f\left(x_{n}\right)\stackrel{p}{\to}f\left(a\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+Continuous mapping theorem 2: If 
+\begin_inset Formula $x_{n}\stackrel{d}{\to}x$
+\end_inset
+
+ and 
+\begin_inset Formula $f\left(\cdot\right)$
+\end_inset
+
+ is continuous almost surely on the support of 
+\begin_inset Formula $x$
+\end_inset
+
+, then 
+\begin_inset Formula $f\left(x_{n}\right)\stackrel{d}{\to}f\left(x\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Slutsky's theorem: If 
+\begin_inset Formula $x_{n}\stackrel{d}{\to}x$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{n}\stackrel{p}{\to}a$
+\end_inset
+
+, then
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $x_{n}+y_{n}\stackrel{d}{\to}x+a$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $x_{n}y_{n}\stackrel{d}{\to}ax$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $x_{n}/y_{n}\stackrel{d}{\to}x/a$
+\end_inset
+
+ if 
+\begin_inset Formula $a\neq0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Slutsky's theorem consists of special cases of the continuous mapping theorem
+ 2.
+ Only because the addition, multiplication and division are encountered
+ so frequently in practice, we list it as a separate theorem.
+\end_layout
+
+\begin_layout Itemize
+Delta method: if 
+\begin_inset Formula $\sqrt{n}\left(\widehat{\theta}-\theta_{0}\right)\stackrel{d}{\to}N\left(0,\Omega\right)$
+\end_inset
+
+, and 
+\begin_inset Formula $f\left(\cdot\right)$
+\end_inset
+
+ is continuously differentiable at 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+ (meaning 
+\begin_inset Formula $\frac{\partial}{\partial\theta}f\left(\cdot\right)$
+\end_inset
+
+ is continuous at 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+), then we have 
+\begin_inset Formula 
+\[
+\sqrt{n}\left(f\left(\widehat{\theta}\right)-f\left(\theta_{0}\right)\right)\stackrel{d}{\to}N\left(0,\frac{\partial f}{\partial\theta'}\left(\theta_{0}\right)\Omega\left(\frac{\partial f}{\partial\theta}\left(\theta_{0}\right)\right)'\right).
 \]
 
 \end_inset
@@ -433,284 +1890,150 @@ If FE.1 and FE.2 are satisfied, then
 \end_layout
 
 \begin_layout Proof
-Let 
-\begin_inset Formula $M_{\iota}=I_{T}-\frac{1}{T}\iota_{T}\iota_{T}'$
+Take a Taylor expansion of 
+\begin_inset Formula $f\left(\widehat{\theta}\right)$
 \end_inset
 
- be the within-group demeaner, and 
-\begin_inset Formula $M=I_{n}\otimes M_{\iota}$
+ around 
+\begin_inset Formula $f\left(\theta_{0}\right)$
 \end_inset
 
-.
- The FE estimator can be explicitly written as 
+:
 \begin_inset Formula 
 \[
-\widehat{\beta}_{2}^{FE}=\left(\tilde{X}'\tilde{X}\right)^{-1}\tilde{X}'\tilde{Y}=\left(X'MX\right)^{-1}X'MY.
+f\left(\widehat{\theta}\right)-f\left(\theta_{0}\right)=\frac{\partial f\left(\dot{\theta}\right)}{\partial\theta'}\left(\widehat{\theta}-\theta_{0}\right),
 \]
 
 \end_inset
 
-So 
-\begin_inset Formula 
-\[
-\sqrt{nT}\left(\widehat{\beta}_{2}^{FE}-\beta_{2}^{0}\right)=\left(\frac{X'MX}{nT}\right)^{-1}\frac{X'M\epsilon}{\sqrt{nT}}=\left(\frac{\tilde{X}'\tilde{X}}{nT}\right)^{-1}\frac{\tilde{X}'\epsilon}{\sqrt{nT}}
-\]
-
+where 
+\begin_inset Formula $\dot{\theta}$
 \end_inset
 
-Since
-\begin_inset Formula 
-\begin{align*}
-\mathrm{var}\left(\frac{\tilde{X}'\epsilon}{\sqrt{nT}}|X\right) & =\frac{1}{nT}E\left(X'M\epsilon\epsilon'MX|X\right)=\frac{1}{nT}X'ME\left(\epsilon\epsilon'|X\right)MX=\left(\frac{\tilde{X}'\tilde{X}}{nT}\right)\sigma^{2},
-\end{align*}
-
-\end_inset
-
-We apply a law of large numbers and conclude 
-\begin_inset Formula 
-\[
-\left(\tilde{X}'\tilde{X}\right)^{1/2}\left(\widehat{\beta}_{2}^{FE}-\beta_{2}^{0}\right)\stackrel{d}{\to}N\left(0,\sigma_{\epsilon}^{2}I_{K}\right).
-\]
-
-\end_inset
-
-For simplicity, suppose we can direct observe 
-\begin_inset Formula $\tilde{\epsilon}_{it}$
-\end_inset
-
-.
- Then 
-\begin_inset Formula 
-\[
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\frac{1}{n\left(T-1\right)}E\left[\sum_{i=1}^{n}\sum_{t=1}^{T}\tilde{\epsilon}_{it}^{2}\right] & =\frac{1}{n}\sum_{i=1}^{n}\frac{1}{T-1}E\left[\epsilon_{i}'M_{\iota}\epsilon_{i}\right]\\
- & =\frac{1}{n}\sum_{i=1}^{n}\frac{1}{T-1}\mathrm{tr}\left(E\left[M_{\iota}E\left[\epsilon_{i}\epsilon_{i}'|\mathbf{x}_{i}\right]\right]\right)\\
- & =\frac{\sigma_{\epsilon}^{2}}{n}\sum_{i=1}^{n}\frac{1}{T-1}\mathrm{tr}\left(M_{\iota}\right)=\sigma_{\epsilon}^{2}.
-\end{align*}
-
-\end_inset
-
-Although in reality we only observe 
-\begin_inset Formula $\widehat{\tilde{\epsilon}}_{it}$
-\end_inset
-
-, we can show that the estimation error between 
-\begin_inset Formula $\widehat{\tilde{\epsilon}}_{it}$
+ lies on the line segment between 
+\begin_inset Formula $\widehat{\theta}$
 \end_inset
 
  and 
-\begin_inset Formula $\tilde{\epsilon}_{it}$
+\begin_inset Formula $\theta_{0}$
 \end_inset
 
- is negligible.
- Thus by the law of large numbers
+.
+ Multiply 
+\begin_inset Formula $\sqrt{n}$
+\end_inset
+
+ on both sides, 
 \begin_inset Formula 
 \[
-\widehat{\sigma}_{\epsilon}^{2}=\frac{1}{n\left(T-1\right)}\sum_{i=1}^{n}\sum_{t=1}^{T}\widehat{\tilde{\epsilon}}_{it}^{2}\stackrel{d}{\to}\frac{1}{n\left(T-1\right)}E\left[\sum_{i=1}^{n}\sum_{t=1}^{T}\tilde{\epsilon}_{it}^{2}\right]=\sigma_{\epsilon}^{2}
+\sqrt{n}\left(f\left(\widehat{\theta}\right)-f\left(\theta_{0}\right)\right)=\frac{\partial f\left(\dot{\theta}\right)}{\partial\theta'}\sqrt{n}\left(\widehat{\theta}-\theta_{0}\right).
 \]
 
 \end_inset
 
-is a consistent estimator of the variance.
- The stated conclusion follows.
-\end_layout
-
-\begin_layout Standard
-We implicitly assume some regularity conditions that allow us to invoke
- a law of large numbers and a central limit theorem.
- We ignore those technical details here.
-\end_layout
-
-\begin_layout Standard
-It is important to notice that the within-group demean in FE eliminates
- all time-invariant explanatory variables, including the intercept.
- Therefore from FE we cannot obtain the coefficient estimates of these time-inva
-riant variables.
-\end_layout
-
-\begin_layout Subsection
-Random Effect
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset label
-LatexCommand label
-name "random-effect"
-
+Because 
+\begin_inset Formula $\widehat{\theta}\stackrel{p}{\to}\theta_{0}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-The random effect estimator pursues efficiency at a knife-edge special case
- 
-\begin_inset Formula $\mathrm{cov}\left(\alpha_{i},x_{it}\right)=0$
-\end_inset
-
-.
- As mentioned above, FE is consistent when 
-\begin_inset Formula $\alpha_{i}$
+ implies 
+\begin_inset Formula $\dot{\theta}\stackrel{p}{\to}\theta_{0}$
 \end_inset
 
  and 
-\begin_inset Formula $x_{it}$
+\begin_inset Formula $\frac{\partial}{\partial\theta'}f\left(\cdot\right)$
 \end_inset
 
- are uncorrelated.
- However, an inspection of the covariance matrix reveals that OLS is inefficient.
+ is continuous at 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+, we have 
+\begin_inset Formula $\frac{\partial}{\partial\theta'}f\left(\dot{\theta}\right)\stackrel{p}{\to}\frac{\partial f\left(\theta_{0}\right)}{\partial\theta'}$
+\end_inset
+
+ by the continuous mapping theorem 1.
+ In view of 
+\begin_inset Formula $\sqrt{n}\left(\widehat{\theta}-\theta_{0}\right)\stackrel{d}{\to}N\left(0,\Omega\right)$
+\end_inset
+
+, Slutsky's Theorem implies 
+\begin_inset Formula 
+\[
+\sqrt{n}\left(f\left(\widehat{\theta}\right)-f\left(\theta_{0}\right)\right)\stackrel{d}{\to}\frac{\partial f\left(\theta_{0}\right)}{\partial\theta'}N\left(0,\Omega\right)
+\]
+
+\end_inset
+
+and the conclusion follows.
+\end_layout
+
+\begin_layout Section
+Summary
 \end_layout
 
 \begin_layout Standard
-The starting point is again the original model, while we assume
+Asymptotic theory is a topic with vast breadth and depth.
+ In this chapter we only scratch the very surface of it.
+ We will discuss in the next chapter how to apply the asymptotic tools we
+ learned here to the OLS estimator.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Assumption RE.1
+Historical notes
 \series default
- 
-\begin_inset Formula $E\left[\epsilon_{it}|\alpha_{i},\mathbf{x}_{i}\right]=0$
-\end_inset
+: Before 1980s, most econometricians did not have a good training in mathematica
+l rigor to master asymptotic theory.
+ A few prominent young (at that time) econometricians came to the field
+ and changed the situation, among them were Halbert White (UCSD), Peter
+ C.B.
+\begin_inset ERT
+status open
 
- and 
-\begin_inset Formula $E\left[\alpha_{i}|\mathbf{x}_{i}\right]=0$
-\end_inset
+\begin_layout Plain Layout
 
-.
+~
 \end_layout
 
-\begin_layout Standard
-RE.1 obviously implies 
-\begin_inset Formula $\mathrm{cov}\left(\alpha_{i},x_{it}\right)=0$
 \end_inset
 
-, so 
-\begin_inset Formula 
-\[
-S=\mathrm{var}\left(u_{i}|\mathbf{x}_{i}\right)=\sigma_{\alpha}^{2}\mathbf{1}_{T}\mathbf{1}_{T}'+\sigma_{\epsilon}^{2}I_{T},\ \mbox{for all }i=1,\ldots,n.
-\]
-
-\end_inset
-
-Because the covariance matrix is not a scalar multiplication of the identity
- matrix, OLS is inefficient.
-\end_layout
-
-\begin_layout Standard
-As mentioned before, FE estimation kills all time-invariant regressors.
- In contrast, RE allows time-invariant explanatory variables.
- Let us rewrite the original equation as 
-\begin_inset Formula 
-\[
-y_{it}=w_{it}\boldsymbol{\beta}+u_{it},
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $\boldsymbol{\beta}=\left(\beta_{1},\beta_{2}'\right)'$
-\end_inset
-
- and 
-\begin_inset Formula $w_{it}=\left(1,x_{it}\right)$
-\end_inset
-
- are 
-\begin_inset Formula $K+1$
-\end_inset
-
- vectors, i.e., 
-\begin_inset Formula $\boldsymbol{\beta}$
-\end_inset
-
- is the parameter including the intercept, and 
-\begin_inset Formula $w_{it}$
-\end_inset
-
- is the explanatory variables including the constant.
- Had we known 
-\begin_inset Formula $S$
-\end_inset
-
-, the GLS estimator would be 
-\begin_inset Formula 
-\[
-\widehat{\boldsymbol{\beta}}^{RE}=\left(\sum_{i=1}^{n}\mathbf{w}_{i}'S^{-1}\mathbf{w}_{i}\right)^{-1}\sum_{i=1}^{n}\mathbf{w}_{i}'S^{-1}\mathbf{y}_{i}=\left(W'\mathbf{S}^{-1}W\right)^{-1}W'\mathbf{S}^{-1}y
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $\mathbf{S}=I_{T}\otimes S$
-\end_inset
-
-.
- (
-\begin_inset Quotes eld
-\end_inset
-
-
-\begin_inset Formula $\otimes$
-\end_inset
-
-
-\begin_inset Quotes erd
-\end_inset
-
- denotes the Kronecker product.) In practice, 
-\begin_inset Formula $\sigma_{\alpha}^{2}$
-\end_inset
-
- and 
-\begin_inset Formula $\sigma_{\epsilon}^{2}$
-\end_inset
-
- in 
-\begin_inset Formula $S$
-\end_inset
-
- are unknown, so we seek consistent estimators.
- Again, we impose a simplifying assumption parallel to FE.2.
+Phillips (Yale) and Peter Robinson (LSE), to name a few.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Assumption RE.2
+Further reading
 \series default
+: Halbert White (1950-2012) wrote an accessible book 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "first edition 1984"
+key "white2014asymptotic"
+literal "false"
+
+\end_inset
+
+ to introduce asymptotics to econometricians.
+ This book remains popular among researchers and graduate students in economics.
  
-\begin_inset Formula $\mathrm{var}\left(\epsilon_{i}|\mathbf{x}_{i},\alpha_{i}\right)=\sigma_{\epsilon}^{2}I_{T}$
+\begin_inset CommandInset citation
+LatexCommand citet
+key "davidson1994stochastic"
+literal "false"
+
 \end_inset
 
- and 
-\begin_inset Formula $\mathrm{var}\left(\alpha_{i}|\mathbf{x}_{i}\right)=\sigma_{\alpha}^{2}.$
-\end_inset
-
-
+ is a longer and more self-contained monograph.
 \end_layout
 
 \begin_layout Standard
-Under this assumption, we can consistently estimate the variances from the
- residuals 
-\begin_inset Formula $\widehat{u}_{it}=y_{it}-x_{it}\widehat{\boldsymbol{\beta}}^{RE}$
-\end_inset
-
-.
- That is 
-\begin_inset Formula 
-\[
-\begin{aligned}\widehat{\sigma}_{u}^{2} & =\frac{1}{nT}\sum_{i=1}^{n}\sum_{t=1}^{T}\widehat{u}_{it}^{2}\\
-\widehat{\sigma}_{\epsilon}^{2} & =\frac{1}{n}\sum_{i=1}^{n}\frac{1}{T\left(T-1\right)}\sum_{t=1}^{T}\sum_{r=1}^{T}\sum_{r\neq t}\widehat{u}_{it}\widehat{u}_{ir}.
-\end{aligned}
-\]
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "ref_teaching"
+options "chicagoa"
 
 \end_inset
 
@@ -718,31 +2041,27 @@ Under this assumption, we can consistently estimate the variances from the
 \end_layout
 
 \begin_layout Standard
-We claim the asymptotic normality without proof.
- If RE.1 and RE.2 are satisfied, then 
-\begin_inset Formula 
-\[
-\left(\widehat{\sigma}_{u}^{2}\left(W'\widehat{\mathbf{S}}^{-1}W\right)^{-1}\right)^{-1/2}\left(\widehat{\boldsymbol{\beta}}^{RE}-\boldsymbol{\beta}_{0}\right)\stackrel{d}{\to}N\left(0,I_{K+1}\right)
-\]
+\begin_inset ERT
+status open
 
-\end_inset
+\begin_layout Plain Layout
 
-where 
-\begin_inset Formula $\widehat{\mathbf{S}}$
-\end_inset
 
- is a consistent estimator of 
-\begin_inset Formula $\mathbf{S}$
-\end_inset
-
-.
+\backslash
+bigskip
 \end_layout
 
-\begin_layout Standard
-The complicated formula of the RE estimator is not important because it
- is be automatically handled by an econometric package.
- What is important is the conceptual difference of FE and RE on their treatment
- of the unobservable individual heterogeneity.
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ Zhentao Shi.
+ Oct 15, 2020.}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
